@@ -1,0 +1,37 @@
+//VARIABLES
+//base colors british pallete CHANGE NAME SAME AS IN JS????
+$colorOne: #273c75;
+$colorTwo: #e1b12c;
+$colorThree: #e84118;
+$colorFour: #7f8fa6;
+
+$colorBlack: #000;
+$colorWhite: #fff;
+
+$borderBottom: 1px dashed $colorFour;
+
+//MEDIA QUERIES
+$break-small: 600px;
+$break-medium: 900px;
+
+
+//EXTEND
+// %button {
+//     border: 0;
+//     background: transparent;
+
+//     padding: 5px;
+//     background-color: $color-two;
+//     box-shadow: 2px 2px 7px 0 $color-four;
+//     font-family: inherit;
+
+//     cursor: pointer;
+
+//     &:active{
+//         transform: translateY(2px)
+//     }
+
+//     &:focus{
+//         outline: none;
+//     }
+// }

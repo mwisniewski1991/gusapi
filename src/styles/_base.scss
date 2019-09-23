@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; //1rem = 10px
+
+    @media screen and (max-width: $break-medium){
+        font-size: 50%; //1rem = 8px
+    }
+
+    @media screen and (max-width: $break-small){
+        font-size: 37.5%; //1rem = 6px
+    }
+}
+
+h1, h2, h3, span, p{
+    &::selection{
+        color: #273c75;
+        background-color: #e1b12c;
+    }
+}
+
+
+body{
+    background-color: $colorOne;
+    color: $colorTwo;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    padding: 1rem;
+}

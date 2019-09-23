@@ -1,0 +1,229 @@
+.header{
+    display: flex;
+
+    justify-content: space-around;
+    align-items: center;
+
+    border-bottom: $borderBottom;
+
+    &__title{
+        font-size: 7.5rem;
+        text-shadow: 2px 2px 7px $colorThree;
+    }
+
+    &__author{
+        font-size: 5rem;
+        color: $colorThree;
+        text-shadow: 2px 2px 5px $colorTwo;
+    }
+
+    &__infoButton{
+        font-size: 2rem;
+        width: 10rem;   
+    }
+}
+
+.section{
+    padding: 2rem 0;
+    border-bottom: $borderBottom;
+
+   
+    
+
+    &__heading{
+        font-size: 3rem;
+        text-shadow: 2px 2px 3px $colorThree;
+        margin-bottom: 2rem;   
+        
+        display: flex;
+        justify-content: center;
+    }
+
+    &__box{
+        display: flex;
+
+        @media screen and (max-width: $break-small){
+            width: 100%;
+            flex-direction: column;
+        }
+    }
+
+    &__chartBox{
+        width: 75%;
+        height: 500px;
+
+        @media screen and (max-width: $break-small){
+            width: 100%;
+        }
+    }
+
+    &__ctrl{
+        width: 25%;
+
+        @media screen and (max-width: $break-small){
+            display: flex;
+            justify-content: space-around;
+        }
+    }
+
+    &__module{
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: $borderBottom;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @media screen and (max-width: $break-small){
+            padding: 2rem 1rem;
+        }
+        
+    }
+
+    &__text{
+        font-size: 3rem;
+        text-shadow: 2px 2px 3px $colorThree; 
+
+        @media screen and (max-width: $break-small){
+            font-size: 2.2rem;
+            padding-bottom: 1rem;
+        }
+    }
+
+    &__textSmall{
+        font-size: 1.5rem;
+
+        @media screen and (max-width: $break-small){
+            font-size: 2rem;
+        }
+    }
+}
+
+.footer{
+    padding: 10px 0;
+
+
+    display: flex;
+    justify-content: space-around;
+
+    &__text{
+        font-size: 1.4rem;
+    }
+
+    &__list{
+        list-style: none;
+    }
+
+    &__listItem::before{
+        content: "->";
+        color: $colorThree;
+    }
+}
+
+
+.infoBox{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba($colorBlack, .85);
+    opacity: 1; 
+
+    top: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all .2s;
+
+
+    &--hide{
+        visibility: hidden;  
+        opacity: 0; 
+    }
+
+    &__square{
+        background-color: $colorOne;
+        width: 70%;
+        height: 70%;
+        padding: 0 5rem 5rem 5rem;
+
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        flex-direction: column;
+
+        @media screen and (max-width: $break-medium){
+            width: 70%;
+            height: 60%;
+            padding: 0 2rem 2rem 2rem;   
+        }
+
+        @media screen and (max-width: $break-small){
+            width: 80%;
+            height: 60%;
+        }
+    }
+
+    &__heading{
+        font-size: 5rem;
+    }
+
+    &__paragraph{
+        font-size: 3rem;
+        text-align: justify;
+    }
+
+    &__close{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+
+        width: 5rem;
+        height: 5rem;
+        top: 0;
+        right: 0;
+
+        display: block;
+        position: absolute;
+
+
+        &:hover::before, &:hover::after{
+            background-color: #e1b12c;
+        }
+
+        &:hover::before{
+            transform: scale(1) rotate(45deg);
+        }   
+        
+        &:hover::after{
+            transform: scale(1) rotate(-45deg);
+        }
+
+        &::before, &::after{
+            content: "";
+            background-color: #e84118;
+            width: 5px;
+            height: 100%;
+            transition: all .2s;
+
+            position: absolute;
+            left: 48%;
+            top: 0;
+        }
+
+        &::before{
+            transform: scale(0.8) rotate(45deg);
+        }
+
+        &::after{
+            transform: scale(0.8) rotate(-45deg);
+        }
+    }
+}

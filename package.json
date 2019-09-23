@@ -1,0 +1,20 @@
+{
+  "name": "shopping-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "prod": "parcel build src/index.html --public-url ./"
+  },
+  "author": "mw",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "sass": "^1.22.10"
+  },
+  "dependencies": {
+    "chart.js": "^2.8.0",
+    "lodash": "^4.17.15"
+  }
+}

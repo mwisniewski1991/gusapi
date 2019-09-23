@@ -1,0 +1,167 @@
+.button{
+    border: 0;
+    background: transparent;
+
+    padding: 5px;
+    background-color: $colorTwo;
+    box-shadow: 2px 2px 7px 0 $colorThree;
+    font-family: inherit;
+
+    cursor: pointer;
+
+    &:active{
+        transform: translateY(2px)
+    }
+
+    &:focus{
+        outline: none;
+    }
+}
+
+.title{
+
+    &--one{
+        color: $colorTwo;
+        text-shadow: 2px 2px 2px $colorThree;
+    }
+
+    &--two{
+        color: $colorThree;
+        text-shadow: 2px 2px 2px $colorTwo;
+    }
+
+    &--three{
+        color: $colorFour;
+        text-shadow: 2px 2px 2px $colorOne;        
+
+        margin: 0 2rem;
+    }
+
+    &--oneSmall{
+        color: $colorTwo;
+        // text-shadow: 1px 1px 1px $colorThree;
+    }
+
+    &--twoSmall{
+        color: $colorThree;
+        // text-shadow: 1px 1px 1px $colorTwo;
+    }
+}
+
+.versusBarChartCtrl{
+
+    @media screen and (max-width: $break-small){
+        width: 100%;
+    }
+
+    //BOXES FOR ALL CONTROLLERS MODULE
+
+    &__optionsBox{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+
+        @media screen and (max-width: $break-small){
+                    height: 100%;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-evenly;
+        }
+
+        // &--special{
+        //     @media screen and (max-width: $break-small){
+        //         display: flex;
+        //         justify-content: center;
+        //         margin-left: 4rem;
+        //     }
+        // }
+
+    }
+
+
+    &__buttonsBox{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+
+        @media screen and (max-width: $break-small){
+            flex-direction: column;
+        }
+    }
+
+}
+
+
+.radioBox{
+    width: 100%;
+
+    &__input{
+        display: none;
+    }
+
+    &__indicator{
+        color: $colorFour;
+        cursor: pointer;
+        transition: all .2s;
+    }
+
+    &__label{
+    }
+
+    &__label &__input:checked ~ &__indicator{
+        color: $colorTwo;
+    }
+
+    &__label &__input:disabled ~ &__indicator{
+        color: $colorBlack;
+        cursor: default;
+    }
+}
+
+.checkboxBox{
+    
+    @media screen and (max-width: $break-small){
+        // width: 100%;
+    }
+
+    &__input{
+        display: none;
+    }
+
+    &__label{
+        cursor: pointer;
+
+        &::before{
+            content: "\2714";
+            border: 1px solid $colorFour;
+            border-radius: 5px;
+            display: inline-block;
+            width: 2.4rem;
+            height: 2.4rem;
+            margin-right: 1rem;
+            padding-left: 4px;
+            color: transparent;
+            transition: all 0.2s;
+
+            @media screen and (max-width: $break-small){
+                padding-left: 3px;
+                width: 3.2rem;
+                height: 3.2rem;
+            }
+        }
+    }
+
+    &__input:checked + &__label:before{
+        color: $colorTwo;
+        border: 1px solid $colorThree;
+    }
+
+    &__input:disabled + &__label{
+        color: $colorBlack;
+        cursor: default;
+    }
+
+    &__input:disabled + &__label::before{
+        border: 1px solid $colorBlack;
+    }
+}

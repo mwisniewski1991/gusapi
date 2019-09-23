@@ -1,0 +1,354 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 50%;
+  }
+}
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 37.5%;
+  }
+}
+
+h1::selection, h2::selection, h3::selection, span::selection, p::selection {
+  color: #273c75;
+  background-color: #e1b12c;
+}
+
+body {
+  background-color: #273c75;
+  color: #e1b12c;
+  font-family: "Alegreya Sans SC", sans-serif;
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px dashed #7f8fa6;
+}
+.header__title {
+  font-size: 7.5rem;
+  text-shadow: 2px 2px 7px #e84118;
+}
+.header__author {
+  font-size: 5rem;
+  color: #e84118;
+  text-shadow: 2px 2px 5px #e1b12c;
+}
+.header__infoButton {
+  font-size: 2rem;
+  width: 10rem;
+}
+
+.section {
+  padding: 2rem 0;
+  border-bottom: 1px dashed #7f8fa6;
+}
+.section__heading {
+  font-size: 3rem;
+  text-shadow: 2px 2px 3px #e84118;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.section__box {
+  display: flex;
+}
+@media screen and (max-width: 600px) {
+  .section__box {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+.section__chartBox {
+  width: 75%;
+  height: 500px;
+}
+@media screen and (max-width: 600px) {
+  .section__chartBox {
+    width: 100%;
+  }
+}
+.section__ctrl {
+  width: 25%;
+}
+@media screen and (max-width: 600px) {
+  .section__ctrl {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+.section__module {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #7f8fa6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media screen and (max-width: 600px) {
+  .section__module {
+    padding: 2rem 1rem;
+  }
+}
+.section__text {
+  font-size: 3rem;
+  text-shadow: 2px 2px 3px #e84118;
+}
+@media screen and (max-width: 600px) {
+  .section__text {
+    font-size: 2.2rem;
+    padding-bottom: 1rem;
+  }
+}
+.section__textSmall {
+  font-size: 1.5rem;
+}
+@media screen and (max-width: 600px) {
+  .section__textSmall {
+    font-size: 2rem;
+  }
+}
+
+.footer {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-around;
+}
+.footer__text {
+  font-size: 1.4rem;
+}
+.footer__list {
+  list-style: none;
+}
+.footer__listItem::before {
+  content: "->";
+  color: #e84118;
+}
+
+.infoBox {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.85);
+  opacity: 1;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+.infoBox--hide {
+  visibility: hidden;
+  opacity: 0;
+}
+.infoBox__square {
+  background-color: #273c75;
+  width: 70%;
+  height: 70%;
+  padding: 0 5rem 5rem 5rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+@media screen and (max-width: 900px) {
+  .infoBox__square {
+    width: 70%;
+    height: 60%;
+    padding: 0 2rem 2rem 2rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .infoBox__square {
+    width: 80%;
+    height: 60%;
+  }
+}
+.infoBox__heading {
+  font-size: 5rem;
+}
+.infoBox__paragraph {
+  font-size: 3rem;
+  text-align: justify;
+}
+.infoBox__close {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  width: 5rem;
+  height: 5rem;
+  top: 0;
+  right: 0;
+  display: block;
+  position: absolute;
+}
+.infoBox__close:hover::before, .infoBox__close:hover::after {
+  background-color: #e1b12c;
+}
+.infoBox__close:hover::before {
+  transform: scale(1) rotate(45deg);
+}
+.infoBox__close:hover::after {
+  transform: scale(1) rotate(-45deg);
+}
+.infoBox__close::before, .infoBox__close::after {
+  content: "";
+  background-color: #e84118;
+  width: 5px;
+  height: 100%;
+  transition: all 0.2s;
+  position: absolute;
+  left: 48%;
+  top: 0;
+}
+.infoBox__close::before {
+  transform: scale(0.8) rotate(45deg);
+}
+.infoBox__close::after {
+  transform: scale(0.8) rotate(-45deg);
+}
+
+.button {
+  border: 0;
+  background: transparent;
+  padding: 5px;
+  background-color: #e1b12c;
+  box-shadow: 2px 2px 7px 0 #e84118;
+  font-family: inherit;
+  cursor: pointer;
+}
+.button:active {
+  transform: translateY(2px);
+}
+.button:focus {
+  outline: none;
+}
+
+.title--one {
+  color: #e1b12c;
+  text-shadow: 2px 2px 2px #e84118;
+}
+.title--two {
+  color: #e84118;
+  text-shadow: 2px 2px 2px #e1b12c;
+}
+.title--three {
+  color: #7f8fa6;
+  text-shadow: 2px 2px 2px #273c75;
+  margin: 0 2rem;
+}
+.title--oneSmall {
+  color: #e1b12c;
+}
+.title--twoSmall {
+  color: #e84118;
+}
+
+@media screen and (max-width: 600px) {
+  .versusBarChartCtrl {
+    width: 100%;
+  }
+}
+.versusBarChartCtrl__optionsBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+@media screen and (max-width: 600px) {
+  .versusBarChartCtrl__optionsBox {
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+}
+.versusBarChartCtrl__buttonsBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+@media screen and (max-width: 600px) {
+  .versusBarChartCtrl__buttonsBox {
+    flex-direction: column;
+  }
+}
+
+.radioBox {
+  width: 100%;
+}
+.radioBox__input {
+  display: none;
+}
+.radioBox__indicator {
+  color: #7f8fa6;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.radioBox__label .radioBox__input:checked ~ .radioBox__indicator {
+  color: #e1b12c;
+}
+.radioBox__label .radioBox__input:disabled ~ .radioBox__indicator {
+  color: #000;
+  cursor: default;
+}
+
+.checkboxBox__input {
+  display: none;
+}
+.checkboxBox__label {
+  cursor: pointer;
+}
+.checkboxBox__label::before {
+  content: "✔";
+  border: 1px solid #7f8fa6;
+  border-radius: 5px;
+  display: inline-block;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-right: 1rem;
+  padding-left: 4px;
+  color: transparent;
+  transition: all 0.2s;
+}
+@media screen and (max-width: 600px) {
+  .checkboxBox__label::before {
+    padding-left: 3px;
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+}
+.checkboxBox__input:checked + .checkboxBox__label:before {
+  color: #e1b12c;
+  border: 1px solid #e84118;
+}
+.checkboxBox__input:disabled + .checkboxBox__label {
+  color: #000;
+  cursor: default;
+}
+.checkboxBox__input:disabled + .checkboxBox__label::before {
+  border: 1px solid #000;
+}
+
+/*# sourceMappingURL=/js.00a46daa.css.map */

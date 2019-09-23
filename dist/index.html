@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300,400,700&display=swap" rel="stylesheet"> 
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.61ef6b08.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.02553ee3.png">
+    
+    <title>GUS api</title>
+<link rel="stylesheet" href="/js.00a46daa.css"></head>
+
+<body>
+
+    <div class="infoBox infoBox--hide">
+        <div class="infoBox__square">
+            <h2 class="infoBox__heading title--one">INFO</h2>
+            <p class="infoBox__paragraph">
+                W aplikacji możesz porównać dwie zmienne i przeanalizować zależności między nimi.
+                Dane pochodzą z GUS. W chwili obecnej są one zapisane w pliku i z niego pobierane.
+            </p>
+            <p class="infoBox__paragraph">
+                W przyszłości zostanie dodana możliwość wyboru zmiennej. Użytkownik będzie mógł porównać 
+                wybrane przez siebie dane, które będą pobierane z GUS API.
+            </p>
+            <button class="infoBox__close" id="infoBoxTurnOffButton"></button>
+        </div>
+    </div>
+
+    <header class="header">
+        <h1 class="header__title">
+            <span class="title title--one">GUS</span>
+            <span class="title title--two">API</span>
+        </h1>
+        <!-- <h2 class="header__author">
+            <span class="title title--one">MW</span>
+            <span class="title title--two">dev</span>
+        </h2> -->
+
+        <div class="header__info">
+            <button class="header__infoButton button" id="infoBoxTurnOnButton">Info</button>
+        </div>
+    </header>
+
+    <section class="section">
+        <h3 class="section__heading">
+            <span class="title title--one" id="versusBarChart__firstVarTitle"></span>
+            <span class="title title--three" id="versusBarChart__varSeparator">vs</span>
+            <span class="title title--two" id="versusBarChart__secondVarTitle"></span>
+        </h3>
+
+        <div class="section__box">
+
+            <div class="section__chartBox">
+                <canvas id="versusBarChart__chart" width="400" height="200"></canvas>
+            </div>
+
+            <div class="section__ctrl versusBarChartCtrl">
+
+                <!-- <div class="section__module">
+                    <div>
+                        <span class="section__text">Obecny rok: </span>
+                        <span class="section__text versusBarChartCtrl__year">2018</span>
+                    </div>
+                    <div class="versusBarChartCtrl__buttonsBox">
+                        <button class="button versusBarChartCtrl__button" id="previous">Porzedni</button>
+                        <button class="button versusBarChartCtrl__button" id="next">Kolejny</button>
+                    </div>
+                </div> -->
+
+                <div class="section__module">
+
+                    <span class="section__text">Pokaż/ukryj</span>
+
+                    <div class="versusBarChartCtrl__optionsBox">
+                        <div class="checkboxBox">
+                            <input class="checkboxBox__input" type="checkbox" id="showHideVar1" checked="">
+                            <label class="checkboxBox__label section__textSmall versusBarChartCtrl__buttonShowHide" id="versusBarChart__firstVarshowHideTitle" for="showHideVar1">
+                            </label>
+                        </div>
+
+                        <div class="checkboxBox">
+                            <input class="checkboxBox__input" type="checkbox" id="showHideVar2" checked="">
+                            <label class="checkboxBox__label section__textSmall versusBarChartCtrl__buttonShowHide" id="versusBarChart__secondVarshowHideTitle" for="showHideVar2">
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="section__module">
+
+                    <span class="section__text">Sortuj według</span>
+
+                    <div class="versusBarChartCtrl__optionsBox radioBox">
+
+                        <label class="radioBox__label section__textSmall" for="sotyByVar1">
+                            <input class="radioBox__input" type="radio" id="sotyByVar1" value="first" name="versusBarChartCtrl__radio" checked="">
+                            <span class="radioBox__indicator versusBarChartCtrl__buttonSort" id="versusBarChart__firstVarSortTitle"></span>
+                        </label>
+
+                        <label class="radioBox__label section__textSmall" for="sotyByVar2">
+                            <input class="radioBox__input" type="radio" id="sotyByVar2" name="versusBarChartCtrl__radio" value="second">
+                            <span class="radioBox__indicator versusBarChartCtrl__buttonSort" id="versusBarChart__secondVarSortTitle"></span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <div class="section__module">
+                    <span class="section__text"> Oblicz wskaźnik </span>
+
+                        <div class="versusBarChartCtrl__optionsBox versusBarChartCtrl__optionsBox--special">
+
+                            <div class="checkboxBox">
+                                <input class="checkboxBox__input" type="checkbox" id="crossedVars">
+                                <label class="checkboxBox__label section__textSmall" for="crossedVars" id="versusBarChart__crossedVars">Pokaż
+                                </label>
+                            </div>
+
+                        </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="footer__author">
+            <div class="footer__text">
+                <span class="title--oneSmall">
+                    Twórca:
+                </span>
+                <span class="title--twoSmall">
+                    Mateusz Wiśniewski
+                </span>
+            </div>
+
+        </div>
+
+        <div class="footer__dataSource">
+            <div class="footer__text">
+                <span class="title--oneSmall">
+                    Źródło danych:
+                </span>
+                <span class="title--twoSmall">
+                    GUS
+                </span>
+            </div>
+        </div>
+
+        <div class="stack">
+            <div class="footer__text">
+                <span class="title--oneSmall">
+                    Zastosowane narzędzia, technologie:
+                </span>
+                <ul class="footer__list">
+                    <li class="footer__listItem">
+                        <span class="title--twoSmall">html + nazewnictwo BEM</span>
+                    </li>
+                    <li class="footer__listItem">
+                        <span class="title--twoSmall">SCSS</span>
+                    </li>
+                    <li class="footer__listItem">
+                        <span class="title--twoSmall">Vanilla JS</span>
+                    </li>
+                    <li class="footer__listItem">
+                        <span class="title--twoSmall">chart.js, lodash</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js.00a46daa.js"></script>
+</body>
+
+</html>
