@@ -4,7 +4,7 @@ allows to configure data acording to your needs.
 
 Current version inclueds only one chart. More in future
 
-Right now data is in JS file. In future app will be conected with GUS API.
+Right now data is storaged in JS file. In future app will be conected with GUS API.
 
 LIVE: http://gusapi.m-wisniewski.usermd.net/
 
