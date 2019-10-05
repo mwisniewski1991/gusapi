@@ -3,7 +3,6 @@ import GusApi from './models/gusapi'
 import * as UIRender from './views/UIRender'
 import * as chartsView from './views/chartsView'
 import { htmlElements } from './views/base'
-import { stat } from 'fs';
 
 const state = {};
 
@@ -47,11 +46,18 @@ const versusBarChart__controller = () =>{
     //9. render chart
     chartsView.versusBarChartRender(state.gusApi.chartData, state, state.gusApi.versusBarChartConfig.hideShow);
 
-    // console.log(state.gusApi);
+    console.log(state.gusApi);
+};
+
+const scatterChart__controller = () =>{
+
+    chartsView.scatterChartrender(state);
+
 };
 
 //LAUNCH CONTROLLER
 versusBarChart__controller();
+scatterChart__controller();
 
 //SHOW HIDE VARS
 const versusBarChart__showHide = (event) =>{

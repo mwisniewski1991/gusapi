@@ -1,6 +1,6 @@
 import Chart from 'chart.js'
 import { htmlElements } from './base'
-import {  colors, optionsVersusBarChart, optionsCombined, createOptionsVersusBarChart } from './chartsConfig'
+import {  colors, optionsVersusBarChart, optionsCombined, createOptionsVersusBarChart, createOptionScatterChart } from './chartsConfig'
 // import collection from 'lodash'
 
 
@@ -130,3 +130,42 @@ export const versusBarChartShowHide = ({ labels, valuesOne, valuesTwo }, state) 
 
 };
 
+
+//RENDER SCATTER SCHART
+export const scatterChartrender = (state) =>{
+
+  const options = createOptionScatterChart();
+  
+  const data = {
+      labels: ["A", "B", "C"],
+      datasets: [{
+        label: 'Scatter Dataset',
+        data: [{
+            x: 7,
+            y: 0,
+            r: 5
+        }, {
+            x: 0,
+            y: 10,
+            r: 20
+        }, {
+            x: 10,
+            y: 5,
+            r: 15
+        }],
+      backgroundColor: colors.colorMixTwoThree,
+      hoverRadius: 0
+    }],
+  };
+
+
+  //2. GET HTML OBJECT TO PUT CHART
+  const ctx = htmlElements.charts.scatterChart; 
+  
+  //3. CREATE CHART
+    state.gusApi.scatterBarChart = new Chart(ctx, {
+      type: 'bubble',
+      data: data,
+      options: options
+    });
+}

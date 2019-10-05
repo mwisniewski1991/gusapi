@@ -99,6 +99,42 @@ export const optionsCombined = {
 };
 
 
+export const createOptionScatterChart = () => {
+
+  const options = {
+      maintainAspectRatio: false,
+      legend: { display: false},
+      scales: {
+        yAxes: [{
+          ticks: {
+            fontFamily: 'Alegreya Sans SC',
+            fontColor: colors.colorTwo
+          },
+          gridLines: {
+            display: true,
+            color: colors.colorFour,
+            borderDash: [3,3]
+          }
+        }
+      ],
+        xAxes:[{
+          id:"valuesOne",
+          position: 'bottom',
+          ticks: {
+            fontFamily: 'Alegreya Sans SC',
+            fontColor: colors.colorTwo
+          },
+          gridLines: {
+            color: colors.colorFour,
+            borderDash: [3,3]
+          }
+        }]
+      }
+  };
+
+  return options
+};
+
 //only to check options in chart.js
 const optionsHelp = {
     maintainAspectRatio: false,

@@ -8,7 +8,8 @@ export const htmlElements = {
     },
 
     charts: {
-        versusBarChart: document.querySelector('#versusBarChart__chart')
+        versusBarChart: document.querySelector('#versusBarChart__chart'),
+        scatterChart: document.querySelector('#scatterChart__chart')
     },
     versusBarChart: {
         //TITLES
@@ -29,6 +30,6 @@ export const htmlElements = {
         
         spanCurrentYear: document.querySelector(".versusBarChart__year"),
         buttonsChangeYear: Array.from(document.querySelectorAll(".versusBarChartCtrl__button"))
-    }
+    },
 
 }
