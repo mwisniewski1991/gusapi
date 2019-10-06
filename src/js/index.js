@@ -7,6 +7,9 @@ import { htmlElements } from './views/base'
 const state = {};
 
 //POPULATION CONTROLLER---------------------------------------------------------------------------------------------------------------
+
+const data__controller = () => {};
+
 const versusBarChart__controller = () =>{
     //1.get data
     state.gusApi = new GusApi; // create new class
@@ -51,13 +54,16 @@ const versusBarChart__controller = () =>{
 
 const scatterChart__controller = () =>{
 
-    chartsView.scatterChartrender(state);
-
+    const scatterData = state.gusApi.scatterChart__createData();
+    
+    state.gusApi.scatterChart.chart = chartsView.scatterChartRender(scatterData);
 };
 
 //LAUNCH CONTROLLER
 versusBarChart__controller();
 scatterChart__controller();
+
+
 
 //SHOW HIDE VARS
 const versusBarChart__showHide = (event) =>{

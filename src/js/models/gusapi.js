@@ -17,6 +17,12 @@ export default class GusApi{
             regionShortnames: ["OPOL", "LUBS", "PODL","ŚK","W-M","Z-P","K-P","LUBL","PODK","POMO","ŁDKZ","DŚLK","MAŁP","WIEP","ŚLSK","MAZO"]
         }
 
+        this.scatterChart = {
+            chart: '',
+            data: '',
+            chartConfig: {}
+        };
+         
         //list of gusVars
         this.dataSource = {
             population: {
@@ -219,4 +225,28 @@ export default class GusApi{
             this.screenSize = "small"
         };
     };
+
+    //------------------------------------------------------------------------------
+    //SCATTER CHART-----------------------------------------------------------------
+    //------------------------------------------------------------------------------
+    scatterChart__createData(){
+
+        const firstVar = this.firstVar.transformedData;
+        const secondVar = this.secondVar.transformedData;
+
+        // //CREATE LABELS FOR SCATTER CHART
+        const dataLabels = firstVar.labels;
+        
+        // //CREATE ARRAY WITH DATA FOR SCATTER CHART
+        const dataValues = [];
+        firstVar.values.forEach( (val, index) =>{
+            const tempObj = {};        
+            tempObj.x = val;
+            tempObj.y = secondVar.values[index];
+            tempObj.r = Math.round(tempObj.x / tempObj.y / 10);
+            dataValues.push(tempObj);
+        })
+
+        return { dataLabels, dataValues};
+    }
 }

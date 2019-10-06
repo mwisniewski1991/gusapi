@@ -102,6 +102,14 @@ export const optionsCombined = {
 export const createOptionScatterChart = () => {
 
   const options = {
+      // plugins: {
+      //   datalabels: {
+      //     formatter: function(value, context) {
+      //       return context.chart.data.labels[context.dataIndex];
+      //     },
+      //     color: "#fff"
+      //   }
+      // },
       maintainAspectRatio: false,
       legend: { display: false},
       scales: {
@@ -129,6 +137,14 @@ export const createOptionScatterChart = () => {
             borderDash: [3,3]
           }
         }]
+      },
+      tooltips : {
+        callbacks: {
+          label: function(t, data){
+            // return `${data.labels[t.index]} Ludnośc: ${t.xLabel}, Pow km2: ${t.yLabel}) `
+            return `${data.labels[t.index]} Ludnośc: ${data.datasets[0].data[t.index].x} Pow km2: ${data.datasets[0].data[t.index].y}`
+          }
+        }
       }
   };
 
