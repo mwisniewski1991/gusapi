@@ -53,10 +53,19 @@ const versusBarChart__controller = () =>{
 };
 
 const scatterChart__controller = () =>{
-
-    const scatterData = state.gusApi.scatterChart__createData();
     
-    state.gusApi.scatterChart.chart = chartsView.scatterChartRender(scatterData);
+    
+    state.gusApi.scatterChart.data = state.gusApi.scatterChart__createData(); //get data
+    
+    const currentVarNames = {
+        firstVarName: state.gusApi.firstVar.name,
+        secondVarName: state.gusApi.secondVar.name
+    }; //get gusvar names
+
+    state.gusApi.scatterChart.chart = chartsView.scatterChartRender(
+        state.gusApi.scatterChart.data, //pass data for chart
+        currentVarNames //pass var names for axis names
+        );
 };
 
 //LAUNCH CONTROLLER

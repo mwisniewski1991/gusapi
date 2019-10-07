@@ -134,13 +134,10 @@ export const versusBarChartShowHide = ({ labels, valuesOne, valuesTwo }, state) 
 
 
 //RENDER SCATTER SCHART
-export const scatterChartRender = ( {dataLabels , dataValues} ) =>{
-
-  console.log(dataLabels);
-  console.log(dataValues);
+export const scatterChartRender = ( {dataLabels , dataValues}, currentVarNames) =>{
 
 
-  const options = createOptionScatterChart();
+  const options = createOptionScatterChart(currentVarNames);
   
   const data = {
       labels: dataLabels,

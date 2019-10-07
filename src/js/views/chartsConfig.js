@@ -99,7 +99,7 @@ export const optionsCombined = {
 };
 
 
-export const createOptionScatterChart = () => {
+export const createOptionScatterChart = ({firstVarName, secondVarName}) => {
 
   const options = {
       // plugins: {
@@ -114,6 +114,12 @@ export const createOptionScatterChart = () => {
       legend: { display: false},
       scales: {
         yAxes: [{
+          scaleLabel:{
+            display: true,
+            labelString: secondVarName,
+            fontFamily: 'Alegreya Sans SC',
+            fontColor: colors.colorTwo
+          },
           ticks: {
             fontFamily: 'Alegreya Sans SC',
             fontColor: colors.colorTwo
@@ -126,8 +132,12 @@ export const createOptionScatterChart = () => {
         }
       ],
         xAxes:[{
-          id:"valuesOne",
-          position: 'bottom',
+          scaleLabel:{
+            display: true,
+            labelString: firstVarName,
+            fontFamily: 'Alegreya Sans SC',
+            fontColor: colors.colorTwo
+          },
           ticks: {
             fontFamily: 'Alegreya Sans SC',
             fontColor: colors.colorTwo
