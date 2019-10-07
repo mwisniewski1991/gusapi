@@ -49,8 +49,16 @@
     }
 
     &__chartBox{
-        width: 75%;
+        // width: 75%;
         height: 500px;
+
+        &--short{
+            width: 75%;
+        }
+
+        &--long{
+            width: 100%;
+        }
 
         @media screen and (max-width: $break-small){
             width: 100%;
