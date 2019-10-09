@@ -27,9 +27,6 @@
     padding: 2rem 0;
     border-bottom: $borderBottom;
 
-   
-    
-
     &__heading{
         font-size: 3rem;
         text-shadow: 2px 2px 3px $colorThree;
@@ -52,6 +49,9 @@
         // width: 75%;
         height: 500px;
 
+        position: relative;
+
+
         &--short{
             width: 75%;
         }
@@ -67,6 +67,9 @@
 
     &__ctrl{
         width: 25%;
+
+        position: relative;
+
 
         @media screen and (max-width: $break-small){
             display: flex;
@@ -128,7 +131,6 @@
         color: $colorThree;
     }
 }
-
 
 .infoBox{
     position: fixed;

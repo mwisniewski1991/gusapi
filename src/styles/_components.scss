@@ -2,10 +2,44 @@
     border: 0;
     background: transparent;
 
-    padding: 5px;
-    background-color: $colorTwo;
+    // background-color: $colorTwo;
     box-shadow: 2px 2px 7px 0 $colorThree;
+    color: $colorThree;
     font-family: inherit;
+    padding: 5px;
+
+    background: linear-gradient(45deg, $colorTwo 30%, #f7f8f8 50%, $colorTwo 70%);
+    background-size: 400%;
+    animation: buttonSliding 7s ease-in-out infinite;
+
+   
+    &--square{
+        border-radius: 10%;
+    }
+
+    &--circle{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    &--versusBarChart{
+        position: absolute;
+        top: 7%;
+        right: 2.5%;
+    }
+
+    &--module{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    &--scatterChart{
+        position: absolute;
+        top: 2.5%;
+        right: 2.5%;
+    }
 
     cursor: pointer;
 
@@ -164,4 +198,15 @@
     &__input:disabled + &__label::before{
         border: 1px solid $colorBlack;
     }
+}
+
+
+.infoHelp{
+   
+    // background-color: $colorTwo;
+    // color: $colorThree;
+    // box-shadow: 2px 2px 7px 0 $colorThree;
+
+    // font-size: 20px;
+
 }
