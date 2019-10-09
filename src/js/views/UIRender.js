@@ -1,23 +1,23 @@
 import { htmlElements } from './base'
 
 //CREATE TITLES ACORDING TO CURRENT GUSVAR
-export const renderTitle = (gusVars) => {
+export const renderTitle = ({ firstVar, secondVar }) => {
     //get html element and put name
-    htmlElements.versusBarChart.firstVarTitle.innerText = gusVars.firstVar.name;
-    htmlElements.versusBarChart.secondVarTitle.innerText = gusVars.secondVar.name;
+    htmlElements.versusBarChart.firstVarTitle.innerText = firstVar.name;
+    htmlElements.versusBarChart.secondVarTitle.innerText = secondVar.name;
 };
 
-export const renderShowHideTitle = (gusVars) => {
+export const renderShowHideTitle = ({ firstVar, secondVar }) => {
     //get html element and put name
-    htmlElements.versusBarChart.firstVarshowHideTitle.innerText = gusVars.firstVar.shortName;
-    htmlElements.versusBarChart.secondVarshowHideTitle.innerText = gusVars.secondVar.shortName;
+    htmlElements.versusBarChart.firstVarshowHideTitle.innerText = firstVar.shortName;
+    htmlElements.versusBarChart.secondVarshowHideTitle.innerText = secondVar.shortName;
 };
 
 //CREATE sort TITLES ACORDING TO CURRENT GUSVAR
-export const renderSortTitle = (gusVars) => {
+export const renderSortTitle = ({ firstVar, secondVar }) => {
     //get html element and put short name
-    htmlElements.versusBarChart.firstVarSortTitle.innerText = gusVars.firstVar.shortName;
-    htmlElements.versusBarChart.secondVarSortTitle.innerText = gusVars.secondVar.shortName;
+    htmlElements.versusBarChart.firstVarSortTitle.innerText = firstVar.shortName;
+    htmlElements.versusBarChart.secondVarSortTitle.innerText = secondVar.shortName;
 };
 
 //RENDER SEPARATOR FOR VAR TITLE

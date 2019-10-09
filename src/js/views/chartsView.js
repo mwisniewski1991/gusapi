@@ -11,7 +11,7 @@ export const versusBarChartRender = ( { labels, valuesOne, valuesTwo }, state, {
 //render chart for population basic 
 
 
-  if(state.gusApi.versusBarChart == undefined){
+  if(state.gusApi.barChart.chart == undefined){
     //if chart not exist create
 
     //1. CREATE OPTIONS PASS INFO IF VARS SHOULD BE HIDDEN OR NOT - BELOW FUNCTION HIDE AXIS 
@@ -41,7 +41,7 @@ export const versusBarChartRender = ( { labels, valuesOne, valuesTwo }, state, {
       const ctx = htmlElements.charts.versusBarChart; 
   
     //3. CREATE CHART
-      state.gusApi.versusBarChart = new Chart(ctx, {
+      state.gusApi.barChart.chart = new Chart(ctx, {
           type: 'horizontalBar',
           data: data,
           options: options
@@ -69,13 +69,13 @@ export const versusBarChartRender = ( { labels, valuesOne, valuesTwo }, state, {
       ]}
 
     //2. ADD NEW DATA TO CHART
-    state.gusApi.versusBarChart.chart.data = data;
+    state.gusApi.barChart.chart.data = data
 
     //3. GET OPTIONS FOR THIS CHART
-    state.gusApi.versusBarChart.chart.options = createOptionsVersusBarChart({firstVarHidden, secondVarHidden});
+    state.gusApi.barChart.chart.options = createOptionsVersusBarChart({firstVarHidden, secondVarHidden});
 
-    //4. UPDATE DATA
-    state.gusApi.versusBarChart.chart.update();
+    // 4. UPDATE DATA
+    state.gusApi.barChart.chart.update();
   } 
 
 };
@@ -96,13 +96,13 @@ export const versusBarChartShowCombined = ({labels, valuesCombined}, state) => {
     ]}
 
   //2. ADD NEW DATA TO CHART
-  state.gusApi.versusBarChart.chart.data = data;
+  state.gusApi.barChart.chart.data = data;
 
   //3. GET OPTIONS FOR THIS CHART
-  state.gusApi.versusBarChart.chart.options = optionsCombined;
+  state.gusApi.barChart.chart.options = optionsCombined;
 
   //4. UPDATE DATA
-  state.gusApi.versusBarChart.chart.update();
+  state.gusApi.barChart.chart.update();
 
 };
 

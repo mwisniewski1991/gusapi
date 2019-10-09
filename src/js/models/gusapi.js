@@ -7,14 +7,24 @@ import collection from 'lodash'
 export default class GusApi{
     constructor(){
         //create objects for gusVars
-        this.firstVar = {}; //object for all data connected with population basic
-        this.secondVar = {}; //object for all data connected with population basic
-        this.versusBarChartConfig = {} //configuration of first chart
+        this.gusVar = {
+            firstVar: {},
+            secondVar: {}
+        };
 
         //region names - short and long
         this.regionsNames = {
             regionLongNames: ["OPOLSKIE", "LUBUSKIE", "PODLASKIE", "ŚWIĘTOKRZYSKIE", "WARMIŃSKO-MAZURSKIE", "ZACHODNIOPOMORSKIE", "KUJAWSKO-POMORSKIE", "LUBELSKIE", "PODKARPACKIE", "POMORSKIE", "ŁÓDZKIE", "DOLNOŚLĄSKIE", "MAŁOPOLSKIE", "WIELKOPOLSKIE", "ŚLĄSKIE", "MAZOWIECKIE"],
             regionShortnames: ["OPOL", "LUBS", "PODL","ŚK","W-M","Z-P","K-P","LUBL","PODK","POMO","ŁDKZ","DŚLK","MAŁP","WIEP","ŚLSK","MAZO"]
+        }
+
+        this.barChart = {
+            chart: undefined,
+            data: '',
+            chartConfig: {
+                currentYear: '',
+                hideShow: ''
+            }
         }
 
         this.scatterChart = {
@@ -55,7 +65,6 @@ export default class GusApi{
 
         return dividedArr
     }
-
 
     //SORT TWO DATA
     sortData(arrLabels, arrDataOne, arrDataTwo, arrDataThree, bySort="one"){
@@ -106,12 +115,17 @@ export default class GusApi{
     getRawData(cat, numVar){ 
 
         //1. save data regarding gusVar to 
-        this[numVar] = this.dataSource[cat] ; //set object for data
+        this.gusVar[numVar] = this.dataSource[cat] ; //set object for data
 
         //2. check and save range for data
-        const min =  parseInt(this[numVar].rawData[0].values[0].year); //find higher year
-        const max =  parseInt(this[numVar].rawData[0].values[this[numVar].rawData[0].values.length - 1].year); //find lower year
-        this[numVar].yearRange = {min, max}
+        // const min =  parseInt(this[numVar].rawData[0].values[0].year); //find higher year
+        // const max =  parseInt(this[numVar].rawData[0].values[this[numVar].rawData[0].values.length - 1].year); //find lower year
+        // this[numVar].yearRange = {min, max}
+
+        this.gusVar[numVar] = this.dataSource[cat];
+        const min =  parseInt(this.gusVar[numVar].rawData[0].values[0].year); //find higher year
+        const max =  parseInt(this.gusVar[numVar].rawData[0].values[this.gusVar[numVar].rawData[0].values.length - 1].year); //find lower year
+        this.gusVar[numVar].yearRange = {min, max};
 
     };
 
@@ -122,20 +136,20 @@ export default class GusApi{
         let labels = []
         let values = []
         
-        this[numVar].rawData.forEach((region) => {
+        this.gusVar[numVar].rawData.forEach((region) => {
             //get labels for every region
             labels.push(region.name); 
 
             //get data for each region for current year with destructuring 
             region.values.forEach(({ year, val }) => {
-                if(parseInt(year) == this.versusBarChartConfig.currentYear){
+                if(parseInt(year) == this.barChart.chartConfig.currentYear){
                     values.push(val);
                 }
             })
         });
 
         // //save data to class and sorted by labels
-        this[numVar].transformedData = { labels, values }  
+        this.gusVar[numVar].transformedData = { labels, values }  
     }
 
 
@@ -145,39 +159,46 @@ export default class GusApi{
 
         //1. SET SORT OPTION TO STATE ONLY FOR FIRST AND SECOND GUSVAR
         if(bySort !== "combined"){
-            this.versusBarChartConfig.versusSort = bySort;
+            // this.versusBarChartConfig.versusSort = bySort;
+            this.barChart.chartConfig.versusSort = bySort;
         }
 
         //2. GET COBMINED DATA FROM GUSVARS
         const combinedData = [];
-        this.firstVar.transformedData.values.forEach( (value, index) => {
-            const combinedValue = Math.round(value / this.secondVar.transformedData.values[index]);
+        // this.firstVar.transformedData.values.forEach( (value, index) => {
+        //     const combinedValue = Math.round(value / this.secondVar.transformedData.values[index]);
+        //     combinedData.push(combinedValue);
+        // });
+
+        this.gusVar.firstVar.transformedData.values.forEach( (value, index) => {
+            const combinedValue = Math.round(value / this.gusVar.secondVar.transformedData.values[index]);
             combinedData.push(combinedValue);
         });
 
         //3. SORT BY SELECTED DATA
         const sortedData = this.sortData(
-            this.firstVar.transformedData.labels, 
-            this.firstVar.transformedData.values, 
-            this.secondVar.transformedData.values, 
+            this.gusVar.firstVar.transformedData.labels, 
+            this.gusVar.firstVar.transformedData.values, 
+            this.gusVar.secondVar.transformedData.values, 
             combinedData,
             bySort)
     
         //4. SAVE DATA TO STATE 
-        this.chartData = sortedData;
+        this.barChart.data = sortedData;
     }
 
     //save current year to state
     versusBarChartSetCurrentYear(year){
-        this.versusBarChartConfig.currentYear = year;
+        this.barChart.chartConfig.currentYear = year;
     }
 
     //set status needed for chart, show which set of data should be hidden
     versusBarChartSetShowHide(){
-        this.versusBarChartConfig.hideShow = {
+    
+        this.barChart.chartConfig.hideShow = {
             firstVarHidden: false,
             secondVarHidden: false
-        };
+        }
     }
 
     //CHANGE LABELS ACORDING TO CURRENT USER SCREEN SIZE
@@ -231,8 +252,8 @@ export default class GusApi{
     //------------------------------------------------------------------------------
     scatterChart__createData(){
 
-        const firstVar = this.firstVar.transformedData;
-        const secondVar = this.secondVar.transformedData;
+        const firstVar = this.gusVar.firstVar.transformedData;
+        const secondVar = this.gusVar.secondVar.transformedData;
 
         // //CREATE LABELS FOR SCATTER CHART
         const dataLabels = firstVar.labels;

@@ -8,7 +8,7 @@ const state = {};
 
 //POPULATION CONTROLLER---------------------------------------------------------------------------------------------------------------
 
-const data__controller = () => {};
+// const data__controller = () => {};
 
 const versusBarChart__controller = () =>{
     //1.get data
@@ -18,12 +18,9 @@ const versusBarChart__controller = () =>{
     state.gusApi.getRawData('area', 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
 
     //2. Render DOM elements titles for VAR
-    UIRender.renderTitle(state.gusApi); //titles
-    UIRender.renderShowHideTitle(state.gusApi); //showHide titles
-    UIRender.renderSortTitle(state.gusApi); //sort titles
-
-
-    // state.gusApi.getRawData('popDensity'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+    UIRender.renderTitle(state.gusApi.gusVar); //titles
+    UIRender.renderShowHideTitle(state.gusApi.gusVar); //showHide titles
+    UIRender.renderSortTitle(state.gusApi.gusVar); //sort titles
 
     //3.set current year
     state.gusApi.versusBarChartSetCurrentYear(2018); //set current year -deafult 2018 
@@ -47,7 +44,7 @@ const versusBarChart__controller = () =>{
     }
 
     //9. render chart
-    chartsView.versusBarChartRender(state.gusApi.chartData, state, state.gusApi.versusBarChartConfig.hideShow);
+    chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow);
 
     console.log(state.gusApi);
 };
@@ -58,8 +55,8 @@ const scatterChart__controller = () =>{
     state.gusApi.scatterChart.data = state.gusApi.scatterChart__createData(); //get data
     
     const currentVarNames = {
-        firstVarName: state.gusApi.firstVar.name,
-        secondVarName: state.gusApi.secondVar.name
+        firstVarName: state.gusApi.gusVar.firstVar.name,
+        secondVarName: state.gusApi.gusVar.secondVar.name
     }; //get gusvar names
 
     state.gusApi.scatterChart.chart = chartsView.scatterChartRender(
@@ -86,10 +83,10 @@ const versusBarChart__showHide = (event) =>{
         
         //3. CHECK IF WHAT IS CURRENT STATUS OF FIRST VAR. THEN CHANGE IT FROM TRUE TO FALSE OR FROM FALSE TO TRUE
         if(selectedInput.checked){
-            state.gusApi.versusBarChartConfig.hideShow.firstVarHidden = true; //change to hidden and save to state 
-            chartsView.versusBarChartShowHide(state.gusApi.chartData, state); 
+            state.gusApi.barChart.chartConfig.hideShow.firstVarHidden = true; //change to hidden and save to state 
+            chartsView.versusBarChartShowHide(state.gusApi.barChart.data, state); 
         }else{
-            state.gusApi.versusBarChartConfig.hideShow.firstVarHidden = false; //change to visible and save to state
+            state.gusApi.barChart.chartConfig.hideShow.firstVarHidden = false; //change to visible and save to state
         }
         
     }
@@ -97,14 +94,14 @@ const versusBarChart__showHide = (event) =>{
         
         //3. CHECK IF WHAT IS CURRENT STATUS OF SECOND VAR. THEN CHANGE IT FROM TRUE TO FALSE OR FROM FALSE TO TRUE
         if(selectedInput.checked){
-            state.gusApi.versusBarChartConfig.hideShow.secondVarHidden = true; //change to hidden and save to state
+            state.gusApi.barChart.chartConfig.hideShow.secondVarHidden = true; //change to hidden and save to state
         }else{
-            state.gusApi.versusBarChartConfig.hideShow.secondVarHidden = false; //change to visible and save to state
+            state.gusApi.barChart.chartConfig.hideShow.secondVarHidden = false; //change to visible and save to state
         }   
     }
 
     //4. RENDER CHART
-    chartsView.versusBarChartRender(state.gusApi.chartData, state, state.gusApi.versusBarChartConfig.hideShow);
+    chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow);
 }
 
 //CHANGE SORT BEETWEN FIRST ANS SECOND GUSVAR
@@ -114,7 +111,7 @@ const versusBarChart__sort = (event) => {
     const inputValue = event.target.parentNode.querySelector('.radioBox__input').value;
 
     //2. GET VARIABLE TO KNOW WHAT SORT OPTION ID CURRENTLY CHECKED
-    const currentVersusSort = state.gusApi.versusBarChartConfig.versusSort;
+    const currentVersusSort = state.gusApi.barChart.chartConfig.versusSort;
 
     //3. UPDATE CHART ONLY IF INPUT IS DIFFRENT THAN CURRENT CHART
     if(inputValue !== currentVersusSort){
@@ -130,7 +127,7 @@ const versusBarChart__sort = (event) => {
         }
 
         //4. RENDER CHART
-        chartsView.versusBarChartRender(state.gusApi.chartData, state, state.gusApi.versusBarChartConfig.hideShow);
+        chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow);
     }
 };
 
@@ -172,13 +169,13 @@ const versusBarChart__showCombinedData = (event) =>{
         }
 
         //6. SHOW COMBINED DATA     
-        chartsView.versusBarChartShowCombined(state.gusApi.chartData, state);
+        chartsView.versusBarChartShowCombined(state.gusApi.barChart.data, state);
 
     }else{
         // console.log('nie zaznaczony');
 
         //1. ENABLE BUTTONS
-        UIRender.versusBarChart__enableButtons(state.gusApi.versusBarChartConfig.hideShow); //pass argument which buttons need to be checked
+        UIRender.versusBarChart__enableButtons(state.gusApi.barChart.chartConfig.hideShow); //pass argument which buttons need to be checked
 
         //2. ADD EVENT LISTENNERS
         htmlElements.versusBarChart.buttonsSort.forEach(el =>{
@@ -190,7 +187,7 @@ const versusBarChart__showCombinedData = (event) =>{
         })
 
         //get variable to know what sort option has been checked
-        const currentVersusSort = state.gusApi.versusBarChartConfig.versusSort;
+        const currentVersusSort = state.gusApi.barChart.chartConfig.versusSort;
         
         //3. GET CHECKED ON FIRST VALUE ACCORDING TO CURRENT STATE SORT STATUS
         if(currentVersusSort === "first"){
@@ -210,10 +207,8 @@ const versusBarChart__showCombinedData = (event) =>{
         }
 
         //6. SHOW VERSUS DATA
-        chartsView.versusBarChartRender(state.gusApi.chartData, state, state.gusApi.versusBarChartConfig.hideShow);
+        chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow);
     }
-
-
 };
 
 
@@ -234,7 +229,7 @@ const versusBarChart__changeLabels = () =>{
     //3. CHECK IF THERE IS ANY CHANGES IF YES CHANGE LABELS AND RENDER CHART AGAIN.
     if(currentScreenState !== state.gusApi.screenSize){
         state.gusApi.versusBarChartChangeLabels(state.gusApi.screenSize); //change labels
-        chartsView.versusBarChartRender(state.gusApi.chartData, state, state.gusApi.versusBarChartConfig.hideShow); //render cahrt
+        chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow); //render cahrt
     };
 };
 
