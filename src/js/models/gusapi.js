@@ -205,7 +205,7 @@ export default class GusApi{
     versusBarChartChangeLabels(currentLabelsSize){
         
         //1. SAVE CURRENT LABELS AND NEW LABELS
-        const currentLabels = this.chartData.labels;
+        const currentLabels = this.barChart.data.labels;
         const newLabels = []
 
         //2. DEPENDS IN WHAT WAY IT IS NECESSERY TO CHANGE LABELS (FROM LONG TO SHORT OR SHORT TO LONG) SAVE LABELS TO CORRECT ARRAYS
@@ -232,7 +232,7 @@ export default class GusApi{
         });
 
         //5. SAVE DATA TO STATE
-        this.chartData.labels = newLabels;
+        this.barChart.data.labels = newLabels;
     };
 
     //SAVE ACTUAL SCREEN SIZE

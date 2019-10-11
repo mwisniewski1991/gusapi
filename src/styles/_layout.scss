@@ -158,7 +158,7 @@
     &__square{
         background-color: $colorOne;
         width: 70%;
-        height: 70%;
+        // height: 70%;
         padding: 0 5rem 5rem 5rem;
 
         position: relative;
@@ -170,23 +170,33 @@
 
         @media screen and (max-width: $break-medium){
             width: 70%;
-            height: 60%;
+            // height: 60%;
             padding: 0 2rem 2rem 2rem;   
         }
 
         @media screen and (max-width: $break-small){
             width: 80%;
-            height: 60%;
+            // height: 60%;
         }
     }
 
     &__heading{
         font-size: 5rem;
+        margin-top: 2rem;
     }
 
     &__paragraph{
         font-size: 3rem;
         text-align: justify;
+        margin-bottom: 2rem;
+
+        @media screen and (max-width: $break-medium){
+            // font-size: 2rem;
+        }
+
+        @media screen and (max-width: $break-small){
+            // font-size: 1rem;
+        }
     }
 
     &__close{
