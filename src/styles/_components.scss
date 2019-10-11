@@ -12,14 +12,18 @@
     background-size: 400%;
     animation: buttonSliding 7s ease-in-out infinite;
 
+    &__image{
+        z-index: 10;
+        color: #f7f8f8;
+    }
    
     &--square{
         border-radius: 10%;
     }
 
     &--circle{
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
         border-radius: 50%;
     }
 
@@ -32,7 +36,7 @@
     &--module{
         position: absolute;
         top: 0;
-        right: 0;
+        right: 0px;
     }
 
     &--scatterChart{
