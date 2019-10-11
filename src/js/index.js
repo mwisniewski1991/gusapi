@@ -1,8 +1,10 @@
 import '../styles/main.scss'; //IMPORT SASS
+import "babel-polyfill"; //IMPORT BABEL FOR ASYNC/AWAIT
 import GusApi from './models/gusapi'
 import * as UIRender from './views/UIRender'
 import * as chartsView from './views/chartsView'
 import { htmlElements } from './views/base'
+import { async } from 'q';
 
 const state = {};
 
@@ -10,12 +12,16 @@ const state = {};
 
 // const data__controller = () => {};
 
-const versusBarChart__controller = () =>{
+const versusBarChart__controller = async () =>{
     //1.get data
     state.gusApi = new GusApi; // create new class
+
+    //API TEST
+    // await state.gusApi.getAPIData('population', 'firstVar');
+    // await state.gusApi.getAPIData('area', 'secondVar');
     
-    state.gusApi.getRawData('population', 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
-    state.gusApi.getRawData('area', 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+    state.gusApi.getRawData('population', 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+    state.gusApi.getRawData('area', 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
 
     //2. Render DOM elements titles for VAR
     UIRender.renderTitle(state.gusApi.gusVar); //titles
@@ -43,15 +49,10 @@ const versusBarChart__controller = () =>{
         state.gusApi.versusBarChartChangeLabels(state.gusApi.screenSize); //change labels
     }
 
-    //9. render chart
+    //9. render bar chart
     chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow);
 
-    console.log(state.gusApi);
-};
-
-const scatterChart__controller = () =>{
-    
-    
+    //10. render scatter chart
     state.gusApi.scatterChart.data = state.gusApi.scatterChart__createData(); //get data
     
     const currentVarNames = {
@@ -62,12 +63,14 @@ const scatterChart__controller = () =>{
     state.gusApi.scatterChart.chart = chartsView.scatterChartRender(
         state.gusApi.scatterChart.data, //pass data for chart
         currentVarNames //pass var names for axis names
-        );
+    );
+
+    console.log(state.gusApi);
 };
+
 
 //LAUNCH CONTROLLER
 versusBarChart__controller();
-scatterChart__controller();
 
 
 

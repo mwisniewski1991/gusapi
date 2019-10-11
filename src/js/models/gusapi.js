@@ -1,6 +1,5 @@
 import { population } from '../data/population';
 import { area } from '../data/area';
-import { popDensity } from '../data/popDensity';
 import collection from 'lodash'
 
 
@@ -38,16 +37,24 @@ export default class GusApi{
             population: {
                 name: 'Ludność ogółem',
                 shortName: 'Ludność',
-                rawData: population.results
+                rawData: population.results,
+                apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/72305?format=json&unit-level=2&page-size=100'
             },
             area: {
                 name: "Powierzchnia w km2",
                 shortName: "Powierzchnia",
-                rawData: area.results
+                rawData: area.results,
+                apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/2018?format=json&unit-level=2&page-size=100'
             }
         }
 
-        //https://bdl.stat.gov.pl/api/v1/data/by-variable/72305?format=json&unit-level=2&page-size=16 //population
+        //TEST
+        this.testGusVar= {
+            firstVar: {},
+            secondVar: {}
+        }
+
+        //https://bdl.stat.gov.pl/api/v1/data/by-variable/72305?format=json&unit-level=2&page-size=100 //population
         //https://bdl.stat.gov.pl/api/v1/data/by-variable/2018?format=json&unit-level=2&page-size=100 //area
         //https://bdl.stat.gov.pl/api/v1/data/by-variable/60559?format=xml&unit-level=2&page-size=100 //gęstość zaludnienia
 
@@ -110,7 +117,28 @@ export default class GusApi{
         return {labels, valuesOne, valuesTwo, valuesCombined}
     }
 
-    
+
+    async getAPIData(cat, numVar){
+        const proxy = `https://cors-anywhere.herokuapp.com/`;
+        const url = `${proxy}${this.dataSource[cat].apiURL}`;
+        
+
+        const response = await fetch(url, {
+            method: "GET",
+            mode: 'cors',
+            headers: {
+                'X-ClientId': '1a7ec620-12ad-4092-9b61-08d6b5ef3084'
+        }})
+        const data = await response.json()
+
+        this.gusVar[numVar] = this.dataSource[cat];
+        const min =  parseInt(this.gusVar[numVar].rawData[0].values[0].year); //find higher year
+        const max =  parseInt(this.gusVar[numVar].rawData[0].values[this.gusVar[numVar].rawData[0].values.length - 1].year); //find lower year
+        
+        this.gusVar[numVar].yearRange = {min, max};
+    }
+
+
     //GET DATA FROM API RIGHT NOW FOR TESTING PURPOSE FROM JS FILE !!!!!!!!!!!!!!!!!!!!!!1
     getRawData(cat, numVar){ 
 
@@ -264,10 +292,18 @@ export default class GusApi{
             const tempObj = {};        
             tempObj.x = val;
             tempObj.y = secondVar.values[index];
-            tempObj.r = Math.round(tempObj.x / tempObj.y / 10);
+            // tempObj.r = Math.round(tempObj.x / tempObj.y / 10);
+            tempObj.r = tempObj.x / tempObj.y;
             dataValues.push(tempObj);
         })
 
         return { dataLabels, dataValues};
+    }
+
+    scatterChart__calcRValues(dataValues){
+
+        console.log(dataValues)
+
+
     }
 }
