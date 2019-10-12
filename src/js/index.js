@@ -17,11 +17,13 @@ const versusBarChart__controller = async () =>{
     state.gusApi = new GusApi; // create new class
 
     //API TEST
-    // await state.gusApi.getAPIData('population', 'firstVar');
-    // await state.gusApi.getAPIData('area', 'secondVar');
+    await state.gusApi.getAPIData('population', 'firstVar');
+    await state.gusApi.getAPIData('area', 'secondVar');
+
+    await state.gusApi.getAPIDataTEST('cars', 'secondVar');
     
-    state.gusApi.getRawData('area', 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
-    state.gusApi.getRawData('area', 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+    // state.gusApi.getRawData('area', 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+    // state.gusApi.getRawData('area', 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
 
     //2. Render DOM elements titles for VAR
     UIRender.renderTitle(state.gusApi.gusVar); //titles

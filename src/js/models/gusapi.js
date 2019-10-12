@@ -45,23 +45,25 @@ export default class GusApi{
                 shortName: "Powierzchnia",
                 rawData: area.results,
                 apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/2018?format=json&unit-level=2&page-size=100'
+            },
+            cars: {
+                name: "Samochody osobowe",
+                shortName: "Samochody",
+                // rawData: area.results,
+                apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/32561?format=json&unit-level=2&page-size=100'
             }
         }
+
+        this.gusVarTEST = {
+            firstVar: {},
+            secondVar: {}
+        };
+
+
+
         //https://bdl.stat.gov.pl/api/v1/data/by-variable/72305?format=json&unit-level=2&page-size=100 //population
         //https://bdl.stat.gov.pl/api/v1/data/by-variable/2018?format=json&unit-level=2&page-size=100 //area
         //https://bdl.stat.gov.pl/api/v1/data/by-variable/60559?format=xml&unit-level=2&page-size=100 //gęstość zaludnienia
-    }
-
-    changeDateToThous(arr){
-        //reduce values to thousands
-        const dividedArr = [];
-        const divider = 1000;
-
-        arr.forEach((value) => {
-            dividedArr.push(value/divider); 
-        });
-
-        return dividedArr
     }
 
     //SORT TWO DATA
@@ -108,6 +110,25 @@ export default class GusApi{
         return {labels, valuesOne, valuesTwo, valuesCombined}
     }
 
+    async getAPIDataTEST(cat, numVar){
+        const proxy = `https://cors-anywhere.herokuapp.com/`;
+        const url = `${proxy}${this.dataSource[cat].apiURL}`;
+        
+
+        const response = await fetch(url, {
+            method: "GET",
+            mode: 'cors',
+            headers: {
+                'X-ClientId': '1a7ec620-12ad-4092-9b61-08d6b5ef3084'
+        }})
+        const data = await response.json()
+
+        this.gusVarTEST[numVar] = this.dataSource[cat];
+        const min =  parseInt(this.gusVarTEST[numVar].rawData[0].values[0].year); //find higher year
+        const max =  parseInt(this.gusVarTEST[numVar].rawData[0].values[this.gusVarTEST[numVar].rawData[0].values.length - 1].year); //find lower year
+        
+        this.gusVarTEST[numVar].yearRange = {min, max};
+    }
 
     async getAPIData(cat, numVar){
         const proxy = `https://cors-anywhere.herokuapp.com/`;
