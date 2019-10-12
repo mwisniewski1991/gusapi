@@ -20,8 +20,8 @@ const versusBarChart__controller = async () =>{
     // await state.gusApi.getAPIData('population', 'firstVar');
     // await state.gusApi.getAPIData('area', 'secondVar');
     
-    state.gusApi.getRawData('population', 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
     state.gusApi.getRawData('area', 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+    state.gusApi.getRawData('area', 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
 
     //2. Render DOM elements titles for VAR
     UIRender.renderTitle(state.gusApi.gusVar); //titles
@@ -52,14 +52,19 @@ const versusBarChart__controller = async () =>{
     //9. render bar chart
     chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow);
 
-    //10. render scatter chart
+    //-------------------------------------------------------------------------------------------------
+    //SCATTER CHART -----------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------
+    //get data
     state.gusApi.scatterChart.data = state.gusApi.scatterChart__createData(); //get data
     
+     //get gusvar names
     const currentVarNames = {
         firstVarName: state.gusApi.gusVar.firstVar.name,
         secondVarName: state.gusApi.gusVar.secondVar.name
-    }; //get gusvar names
-
+    };
+    
+    //render scatter chart
     state.gusApi.scatterChart.chart = chartsView.scatterChartRender(
         state.gusApi.scatterChart.data, //pass data for chart
         currentVarNames //pass var names for axis names

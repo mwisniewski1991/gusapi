@@ -190,7 +190,7 @@ export default class GusApi{
         // });
 
         this.gusVar.firstVar.transformedData.values.forEach( (value, index) => {
-            const combinedValue = Math.round(value / this.gusVar.secondVar.transformedData.values[index]);
+            const combinedValue = value / this.gusVar.secondVar.transformedData.values[index];
             combinedData.push(combinedValue);
         });
 
