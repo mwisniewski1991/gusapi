@@ -47,18 +47,9 @@ export default class GusApi{
                 apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/2018?format=json&unit-level=2&page-size=100'
             }
         }
-
-        //TEST
-        this.testGusVar= {
-            firstVar: {},
-            secondVar: {}
-        }
-
         //https://bdl.stat.gov.pl/api/v1/data/by-variable/72305?format=json&unit-level=2&page-size=100 //population
         //https://bdl.stat.gov.pl/api/v1/data/by-variable/2018?format=json&unit-level=2&page-size=100 //area
         //https://bdl.stat.gov.pl/api/v1/data/by-variable/60559?format=xml&unit-level=2&page-size=100 //gęstość zaludnienia
-
-        
     }
 
     changeDateToThous(arr){
@@ -283,27 +274,35 @@ export default class GusApi{
         const firstVar = this.gusVar.firstVar.transformedData;
         const secondVar = this.gusVar.secondVar.transformedData;
 
-        // //CREATE LABELS FOR SCATTER CHART
+        //CREATE LABELS FOR SCATTER CHART
         const dataLabels = firstVar.labels;
         
-        // //CREATE ARRAY WITH DATA FOR SCATTER CHART
+        //CREATE ARRAY WITH DATA FOR SCATTER CHART
         const dataValues = [];
         firstVar.values.forEach( (val, index) =>{
             const tempObj = {};        
             tempObj.x = val;
             tempObj.y = secondVar.values[index];
             // tempObj.r = Math.round(tempObj.x / tempObj.y / 10);
-            tempObj.r = tempObj.x / tempObj.y;
+            tempObj.r = tempObj.x / tempObj.y / 10;
             dataValues.push(tempObj);
         })
 
+
+        //CALCULATE R VALUE - PIXEL SIZE 
+        const maxValue = Math.max(...dataValues.map(el => el.r)); //find max value of R values
+        dataValues.forEach(el => {
+            el.r = this.scatterChart__calcRValues(el.r, maxValue);
+        });
+            
         return { dataLabels, dataValues};
     }
 
-    scatterChart__calcRValues(dataValues){
+    scatterChart__calcRValues(currentvalue, maxValue){
+        const maxPixels = 30; //SET BIGEST CIRCLE - WILL BE ADDED 2 PIXELX IN CASE OF 0 VALUES
+        const perValue = currentvalue / maxValue;
+        const finalPixel = Math.round(maxPixels * perValue + 2);
 
-        console.log(dataValues)
-
-
+        return finalPixel;
     }
 }
