@@ -4,26 +4,30 @@ import GusApi from './models/gusapi'
 import * as UIRender from './views/UIRender'
 import * as chartsView from './views/chartsView'
 import { htmlElements } from './views/base'
-import { async } from 'q';
 
 const state = {};
 
 //POPULATION CONTROLLER---------------------------------------------------------------------------------------------------------------
 
-// const data__controller = () => {};
-
 const versusBarChart__controller = async () =>{
     //1.get data
     state.gusApi = new GusApi; // create new class
 
-    //API TEST
-    await state.gusApi.getAPIData('population', 'firstVar');
-    await state.gusApi.getAPIData('area', 'secondVar');
+    //API FROM BROWSER FOR TESTING
+    // await state.gusApi.getAPIDataTEST('cars', 'secondVar');
 
-    await state.gusApi.getAPIDataTEST('cars', 'secondVar');
-    
+    // API FROM BROWSER
+    // await state.gusApi.getAPIData('population', 'firstVar');
+    // await state.gusApi.getAPIData('cars', 'secondVar');
+
+    // APIFROM FILE 
     // state.gusApi.getRawData('area', 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
     // state.gusApi.getRawData('area', 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+
+    //API FROM NODE
+    await state.gusApi.getAPIDataNode('population', 'firstVar');
+    await state.gusApi.getAPIDataNode('cars', 'secondVar');
+    
 
     //2. Render DOM elements titles for VAR
     UIRender.renderTitle(state.gusApi.gusVar); //titles

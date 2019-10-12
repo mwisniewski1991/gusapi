@@ -37,13 +37,13 @@ export default class GusApi{
             population: {
                 name: 'Ludność ogółem',
                 shortName: 'Ludność',
-                rawData: population.results,
+                // rawData: population.results,
                 apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/72305?format=json&unit-level=2&page-size=100'
             },
             area: {
                 name: "Powierzchnia w km2",
                 shortName: "Powierzchnia",
-                rawData: area.results,
+                // rawData: area.results,
                 apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/2018?format=json&unit-level=2&page-size=100'
             },
             cars: {
@@ -54,66 +54,31 @@ export default class GusApi{
             }
         }
 
+        //TESTING NEW GUS VAR
         this.gusVarTEST = {
             firstVar: {},
             secondVar: {}
         };
-
-
-
-        //https://bdl.stat.gov.pl/api/v1/data/by-variable/72305?format=json&unit-level=2&page-size=100 //population
-        //https://bdl.stat.gov.pl/api/v1/data/by-variable/2018?format=json&unit-level=2&page-size=100 //area
-        //https://bdl.stat.gov.pl/api/v1/data/by-variable/60559?format=xml&unit-level=2&page-size=100 //gęstość zaludnienia
     }
 
-    //SORT TWO DATA
-    sortData(arrLabels, arrDataOne, arrDataTwo, arrDataThree, bySort="one"){
-    
-        //create object from two arrays
-        let arrayOfObj = arrLabels.map(function(d, i) {
-            return {
-              labels: d,
-              valuesOne: arrDataOne[i] || 0,
-              valuesTwo: arrDataTwo[i] || 0,
-              valuesCombined: arrDataThree[i] || 0
-            };
-          });
-      
-        let sortedArrayOfObj
-        //sort obj with lodash library
-        if(bySort === "first"){
-          sortedArrayOfObj = collection.sortBy(arrayOfObj, ['valuesOne']);
-        };
-        if(bySort === "second"){
-          sortedArrayOfObj = collection.sortBy(arrayOfObj, ['valuesTwo']);
-        };
-        if(bySort === "combined"){
-          sortedArrayOfObj = collection.sortBy(arrayOfObj, ['valuesCombined']);
-        }
+    async getAPIDataNode(cat, numVar){
 
+        const apiURL = `/gusapi/${cat}`;
+
+        const resposne = await fetch(apiURL);
+        const data = await resposne.json();
+
+        this.gusVar[numVar] = this.dataSource[cat];
+        this.gusVar[numVar].rawData = data.results; //save data from API to state
+
+        const min =  parseInt(this.gusVar[numVar].rawData[0].values[0].year); //find higher year
+        const max =  parseInt(this.gusVar[numVar].rawData[0].values[this.gusVar[numVar].rawData[0].values.length - 1].year); //find lower year
         
-        //back two arrays, now sorted first create arrays
-        let labels = [];
-        let valuesOne = [];
-        let valuesTwo = [];
-        let valuesCombined = [];
-
-        //second push data to those arrays
-        sortedArrayOfObj.forEach(function(d){
-            labels.push(d.labels);
-            valuesOne.push(d.valuesOne);
-            valuesTwo.push(d.valuesTwo);
-            valuesCombined.push(d.valuesCombined);
-          });
-      
-        //return data as object with two arrays
-        return {labels, valuesOne, valuesTwo, valuesCombined}
+        this.gusVar[numVar].yearRange = {min, max};
     }
 
     async getAPIDataTEST(cat, numVar){
-        const proxy = `https://cors-anywhere.herokuapp.com/`;
         const url = `${proxy}${this.dataSource[cat].apiURL}`;
-        
 
         const response = await fetch(url, {
             method: "GET",
@@ -124,6 +89,8 @@ export default class GusApi{
         const data = await response.json()
 
         this.gusVarTEST[numVar] = this.dataSource[cat];
+        this.gusVarTEST[numVar].rawData = data.results; //save data from API to state
+
         const min =  parseInt(this.gusVarTEST[numVar].rawData[0].values[0].year); //find higher year
         const max =  parseInt(this.gusVarTEST[numVar].rawData[0].values[this.gusVarTEST[numVar].rawData[0].values.length - 1].year); //find lower year
         
@@ -144,6 +111,8 @@ export default class GusApi{
         const data = await response.json()
 
         this.gusVar[numVar] = this.dataSource[cat];
+        this.gusVar[numVar].rawData = data.results; //save data from API to state
+
         const min =  parseInt(this.gusVar[numVar].rawData[0].values[0].year); //find higher year
         const max =  parseInt(this.gusVar[numVar].rawData[0].values[this.gusVar[numVar].rawData[0].values.length - 1].year); //find lower year
         
@@ -192,6 +161,49 @@ export default class GusApi{
         this.gusVar[numVar].transformedData = { labels, values }  
     }
 
+    //SORT TWO DATA
+     sortData(arrLabels, arrDataOne, arrDataTwo, arrDataThree, bySort="one"){
+    
+        //create object from two arrays
+        let arrayOfObj = arrLabels.map(function(d, i) {
+            return {
+              labels: d,
+              valuesOne: arrDataOne[i] || 0,
+              valuesTwo: arrDataTwo[i] || 0,
+              valuesCombined: arrDataThree[i] || 0
+            };
+          });
+      
+        let sortedArrayOfObj
+        //sort obj with lodash library
+        if(bySort === "first"){
+          sortedArrayOfObj = collection.sortBy(arrayOfObj, ['valuesOne']);
+        };
+        if(bySort === "second"){
+          sortedArrayOfObj = collection.sortBy(arrayOfObj, ['valuesTwo']);
+        };
+        if(bySort === "combined"){
+          sortedArrayOfObj = collection.sortBy(arrayOfObj, ['valuesCombined']);
+        }
+
+        
+        //back two arrays, now sorted first create arrays
+        let labels = [];
+        let valuesOne = [];
+        let valuesTwo = [];
+        let valuesCombined = [];
+
+        //second push data to those arrays
+        sortedArrayOfObj.forEach(function(d){
+            labels.push(d.labels);
+            valuesOne.push(d.valuesOne);
+            valuesTwo.push(d.valuesTwo);
+            valuesCombined.push(d.valuesCombined);
+          });
+      
+        //return data as object with two arrays
+        return {labels, valuesOne, valuesTwo, valuesCombined}
+    }
 
     //create data which will be injected into chart.js
     getChartData(bySort='first'){
