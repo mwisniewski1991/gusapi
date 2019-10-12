@@ -18,6 +18,10 @@ const dataSource = {
     },
     cars: {
         apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/32561?format=json&unit-level=2&page-size=100'
+    },
+    highways: {
+        apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/453823?format=json&unit-level=2&page-size=100'
+        //P1722
     }
 }
 
@@ -41,6 +45,9 @@ app.get('/gusapi/:cat', async (req, res) => {
     res.json(data);
 });
 
+
+//STRUKTURA GUS API
+// K > G > P > variable  
 
 
 // app.get('/test', async (req, res) => {

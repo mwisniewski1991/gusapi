@@ -24,9 +24,9 @@ const versusBarChart__controller = async () =>{
     // state.gusApi.getRawData('area', 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
     // state.gusApi.getRawData('area', 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
 
-    //API FROM NODE
+    //1. API FROM NODE
     await state.gusApi.getAPIDataNode('population', 'firstVar');
-    await state.gusApi.getAPIDataNode('cars', 'secondVar');
+    await state.gusApi.getAPIDataNode('highways', 'secondVar');
     
 
     //2. Render DOM elements titles for VAR

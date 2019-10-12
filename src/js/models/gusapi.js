@@ -49,8 +49,13 @@ export default class GusApi{
             cars: {
                 name: "Samochody osobowe",
                 shortName: "Samochody",
-                // rawData: area.results,
                 apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/32561?format=json&unit-level=2&page-size=100'
+            },
+            highways: {
+                name: 'Drogi ekspresowe i autostrady',
+                shortName: 'Autostrady itp.',
+                apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/453823?format=json&unit-level=2&page-size=100'
+                //P1722
             }
         }
 
