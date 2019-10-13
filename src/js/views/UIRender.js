@@ -69,3 +69,13 @@ export const versusBarChart__enableButtons = ( {firstVarHidden , secondVarHidden
 export const showHideInfoBox = () =>{
     htmlElements.infoBox.infoBox.classList.toggle('infoBox--hide');
 };
+
+//LOADERS 
+export const barChart__loaders = () => {
+    const loaders = htmlElements.versusBarChart.loaders;
+    
+    Array.from(loaders).forEach(loader =>{
+        loader.classList.toggle('section__loaderBox--hidden');
+    })
+
+};

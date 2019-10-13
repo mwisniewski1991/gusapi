@@ -16,6 +16,7 @@ $break-medium: 900px;
 
 
 //ANIMATION
+//buttons--------------------------------------------------------------
 @keyframes buttonSliding {
     0% {
       background-position: 100% 50%;
@@ -26,8 +27,38 @@ $break-medium: 900px;
     100% {
       background-position: 0 50%;
     }
-}
+};
 
+//loaders--------------------------------------------------------------
+$border-size: 3px;
+@keyframes rotate {
+  0% {
+    		transform: rotate(0deg);
+        border-top: $border-size solid $colorTwo;
+        border-bottom: $border-size solid $colorThree;
+  }  
+  50% {
+    		transform: rotate(180deg);
+        border-top: $border-size solid $colorThree;
+        border-bottom: $border-size solid $colorTwo;
+  }  
+  100% {
+    		transform: rotate(360deg);
+        border-top: $border-size solid $colorTwo;
+        border-bottom: $border-size solid $colorThree;
+  }  
+};
+
+@mixin circle-style{
+  padding: 8px;
+  border-radius: 50%;
+  border-top: $border-size solid $colorTwo;
+  border-bottom: $border-size solid $colorThree;
+  border-left: $border-size solid transparent;
+  border-right: $border-size solid transparent;
+
+  animation: rotate linear 2s infinite;
+}
 
 //EXTEND
 // %button {

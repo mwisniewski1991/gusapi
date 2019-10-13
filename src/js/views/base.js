@@ -26,8 +26,11 @@ export const htmlElements = {
         buttonsSort: Array.from(document.querySelectorAll(".versusBarChartCtrl__buttonSort")),
         //CROSSED VARS
         buttonAddCrossedVars: document.querySelector('#versusBarChart__crossedVars'),
+        //LOADERS
+        barChartLoader: document.querySelector('#barChart__loader'),
+        loaders: document.querySelectorAll('.section__loaderBox'),
         
-        
+
         spanCurrentYear: document.querySelector(".versusBarChart__year"),
         buttonsChangeYear: Array.from(document.querySelectorAll(".versusBarChartCtrl__button"))
     },

@@ -7,9 +7,15 @@ import { htmlElements } from './views/base'
 
 const state = {};
 
+
+
 //POPULATION CONTROLLER---------------------------------------------------------------------------------------------------------------
 
 const versusBarChart__controller = async () =>{
+
+    //UI loader start - barChart
+    UIRender.barChart__loaders();
+
     //1.get data
     state.gusApi = new GusApi; // create new class
 
@@ -55,6 +61,9 @@ const versusBarChart__controller = async () =>{
         state.gusApi.versusBarChartChangeLabels(state.gusApi.screenSize); //change labels
     }
 
+    //UI loader end - barChart
+    UIRender.barChart__loaders();
+
     //9. render bar chart
     chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow);
 
@@ -82,7 +91,6 @@ const versusBarChart__controller = async () =>{
 
 //LAUNCH CONTROLLER
 versusBarChart__controller();
-
 
 
 //SHOW HIDE VARS

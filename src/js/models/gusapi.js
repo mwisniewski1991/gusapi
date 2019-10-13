@@ -37,13 +37,13 @@ export default class GusApi{
             population: {
                 name: 'Ludność ogółem',
                 shortName: 'Ludność',
-                // rawData: population.results,
+                rawData: population.results,
                 apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/72305?format=json&unit-level=2&page-size=100'
             },
             area: {
                 name: "Powierzchnia w km2",
                 shortName: "Powierzchnia",
-                // rawData: area.results,
+                rawData: area.results,
                 apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/2018?format=json&unit-level=2&page-size=100'
             },
             cars: {
