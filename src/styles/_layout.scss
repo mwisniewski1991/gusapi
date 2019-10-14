@@ -8,7 +8,9 @@
     background-color: rgba($colorBlack, .35);
     z-index: 2;      
 
-    // display: none;
+    &--hide{
+        display: none;
+    }
 }
 
 .header{
@@ -54,6 +56,10 @@
 
         display: flex;
         align-items: center;
+    }
+
+    &__headingTitleButton{
+        z-index: 3;
     }
 
     &__box{

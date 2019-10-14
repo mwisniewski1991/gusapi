@@ -217,8 +217,16 @@
     z-index: 3;
     top: 100%;
 
-    display: flex;
-    flex-direction: column;
+    &--show{
+        display: flex;
+        flex-direction: column;
+    }
+
+    &--hide{
+        display: none;
+    }
+
+    
 
     &--left{
         left: 50%;
@@ -231,6 +239,7 @@
     &__button{
         margin-bottom: 5px;
         font-size: 2rem;
+
 
     }
 }

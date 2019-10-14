@@ -82,6 +82,10 @@ const versusBarChart__controller = async () =>{
         state.gusApi.scatterChart.data, //pass data for chart
         currentVarNames //pass var names for axis names
     );
+    
+    //SELECT VAR BOX - RENDER BUTTONS
+    UIRender.varBoxes__buttonsRender(state.gusApi.dataSource) 
+
 
     console.log(state.gusApi);
 };
@@ -253,6 +257,15 @@ const versusBarChart__changeLabels = () =>{
     };
 };
 
+// VAR BOXES
+const varBoxes__showHide = (event) =>{
+
+    htmlElements.shadow.classList.toggle('shadow--hide');
+    console.log(event.target.parentNode)
+
+};
+
+
 //NOT IN USE 
 const versusBarChart__changeYear = (event) => {
     //change year for basic chart
@@ -292,6 +305,7 @@ const versusBarChart__changeYear = (event) => {
 
 
 
+
 //EVENT LISTENERS-----------------------------------------------------------------------------------------------------------------------
 //VERSUR BAR CHART
 
@@ -315,6 +329,12 @@ window.addEventListener('resize', versusBarChart__changeLabels);
 htmlElements.infoBox.infoBoxTurnOnButton.addEventListener('click', UIRender.showHideInfoBox);
 htmlElements.infoBox.infoBoxTurnOffButton.addEventListener('click', UIRender.showHideInfoBox);
 
+
+//VAR BOXES - show hide
+htmlElements.selectVarBoxes.buttons.forEach(el => {
+    el.addEventListener('click', varBoxes__showHide)
+
+});
 
 
 //NOT IN USE

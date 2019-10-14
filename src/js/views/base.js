@@ -1,12 +1,17 @@
 export const htmlElements = {
-
+    shadow: document.querySelector('.shadow'),
     infoBox: {
         //INFO BOX
         infoBoxTurnOnButton: document.querySelector('#infoBoxTurnOnButton'),
         infoBoxTurnOffButton: document.querySelector('#infoBoxTurnOffButton'),
         infoBox: document.querySelector('.infoBox'),
     },
-
+    selectVarBoxes: {
+        boxes: Array.from(document.querySelectorAll('.selectVarBox')),
+        firstVarBox: document.querySelector('#selectVarBox__firstVar'),
+        secondVarBox: document.querySelector('#selectVarBox__secondVar'),
+        buttons: Array.from(document.querySelectorAll('.section__headingTitleButton')),
+    },
     charts: {
         versusBarChart: document.querySelector('#versusBarChart__chart'),
         scatterChart: document.querySelector('#scatterChart__chart')

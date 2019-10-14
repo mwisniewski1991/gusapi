@@ -29,6 +29,9 @@ export const renderVarSeparator = (status) =>{
     }
 };
 
+
+//----------------------------------------------------------------
+//****************************************************************
 //DISABLE BUTTONS VERSUS BAR CHART 
 export const versusBarChart__disableButtons = () => {
 
@@ -65,6 +68,8 @@ export const versusBarChart__enableButtons = ( {firstVarHidden , secondVarHidden
 };
 
 
+//----------------------------------------------------------------
+//****************************************************************
 //INFOBOX SHOW/HIDE
 export const showHideInfoBox = () =>{
     htmlElements.infoBox.infoBox.classList.toggle('infoBox--hide');
@@ -79,3 +84,31 @@ export const barChart__loaders = () => {
     })
 
 };
+
+
+//----------------------------------------------------------------
+//****************************************************************
+//SELECT VAR BOX - RENDER BUTTONS
+export const varBoxes__buttonsRender = (keys) =>{
+
+    const selectVarBoxes = htmlElements.selectVarBoxes.boxes;
+
+    //CREATE BUTTONS FOR SELECT BOXES BASED ON AVAILABE SOURCE
+    Object.keys(keys).forEach(key =>{
+        const varName = keys[key].name;
+
+        const htmlMarkdown = `
+            <button class="selectVarBox__button button button--square">${varName}</button>
+        `;
+        selectVarBoxes.forEach(box => {
+            box.insertAdjacentHTML("beforeend", htmlMarkdown)
+        });
+    })
+}
+
+export const varBoxes__showHide = () =>{
+    
+    const selectVarBoxes = Array.from(htmlElements.selectVarBoxes.boxes);
+
+}
+
