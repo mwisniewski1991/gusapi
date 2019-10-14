@@ -1,3 +1,16 @@
+.shadow{
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    top:0;
+    left:0;
+
+    background-color: rgba($colorBlack, .35);
+    z-index: 2;      
+
+    // display: none;
+}
+
 .header{
     display: flex;
 
@@ -37,6 +50,8 @@
     }
 
     &__headingTitle{
+        position: relative;
+
         display: flex;
         align-items: center;
     }

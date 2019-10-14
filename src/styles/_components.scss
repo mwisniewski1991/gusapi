@@ -212,5 +212,26 @@
     }
 }
 
+.selectVarBox{
+    position: absolute;
+    z-index: 3;
+    top: 100%;
 
+    display: flex;
+    flex-direction: column;
+
+    &--left{
+        left: 50%;
+    }
+
+    &--right{
+        right: 50%;
+    }
+
+    &__button{
+        margin-bottom: 5px;
+        font-size: 2rem;
+
+    }
+}
   
