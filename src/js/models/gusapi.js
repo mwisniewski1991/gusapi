@@ -101,7 +101,7 @@ export default class GusApi{
         
         this.gusVarTEST[numVar].yearRange = {min, max};
     }
-
+    
     async getAPIData(cat, numVar){
         const proxy = `https://cors-anywhere.herokuapp.com/`;
         const url = `${proxy}${this.dataSource[cat].apiURL}`;

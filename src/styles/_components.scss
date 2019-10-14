@@ -3,6 +3,7 @@
     background: transparent;
 
     // background-color: $colorTwo;
+    border-radius: 10%;
     box-shadow: 2px 2px 7px 0 $colorThree;
     color: $colorThree;
     font-family: inherit;
@@ -10,6 +11,7 @@
 
     background: linear-gradient(45deg, $colorTwo 30%, #f7f8f8 50%, $colorTwo 70%);
     background-size: 400%;
+
     animation: buttonSliding 7s ease-in-out infinite;
 
     &__image{
@@ -18,31 +20,13 @@
     }
    
     &--square{
-        border-radius: 10%;
+        font-size: 2rem;
     }
 
-    &--circle{
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-    }
-
-    &--versusBarChart{
-        position: absolute;
-        top: 7%;
-        right: 2.5%;
-    }
-
-    &--module{
-        position: absolute;
-        top: 0;
-        right: 0px;
-    }
-
-    &--scatterChart{
-        position: absolute;
-        top: 2.5%;
-        right: 2.5%;
+    &--squareSmall{
+        width: 8rem;
+        margin: 0 2rem;      
+        font-size: 1.5rem;
     }
 
     cursor: pointer;
@@ -129,7 +113,6 @@
 
 }
 
-
 .radioBox{
     width: 100%;
 
@@ -204,7 +187,6 @@
     }
 }
 
-
 .infoHelp{
    
     // background-color: $colorTwo;
@@ -229,4 +211,6 @@
         @include circle-style
     }
 }
+
+
   

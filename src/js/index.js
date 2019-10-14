@@ -8,9 +8,7 @@ import { htmlElements } from './views/base'
 const state = {};
 
 
-
 //POPULATION CONTROLLER---------------------------------------------------------------------------------------------------------------
-
 const versusBarChart__controller = async () =>{
 
     //UI loader start - barChart
@@ -27,12 +25,12 @@ const versusBarChart__controller = async () =>{
     // await state.gusApi.getAPIData('cars', 'secondVar');
 
     // APIFROM FILE 
-    // state.gusApi.getRawData('area', 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
-    // state.gusApi.getRawData('area', 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+    state.gusApi.getRawData('population', 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+    state.gusApi.getRawData('area', 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
 
     //1. API FROM NODE
-    await state.gusApi.getAPIDataNode('population', 'firstVar');
-    await state.gusApi.getAPIDataNode('highways', 'secondVar');
+    // await state.gusApi.getAPIDataNode('population', 'firstVar');
+    // await state.gusApi.getAPIDataNode('highways', 'secondVar');
     
 
     //2. Render DOM elements titles for VAR
@@ -254,8 +252,6 @@ const versusBarChart__changeLabels = () =>{
         chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow); //render cahrt
     };
 };
-
-
 
 //NOT IN USE 
 const versusBarChart__changeYear = (event) => {
