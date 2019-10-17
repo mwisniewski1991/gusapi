@@ -90,25 +90,39 @@ export const barChart__loaders = () => {
 //****************************************************************
 //SELECT VAR BOX - RENDER BUTTONS
 export const varBoxes__buttonsRender = (keys) =>{
-
+    // console.log(keys); //test
     const selectVarBoxes = htmlElements.selectVarBoxes.boxes;
-
     //CREATE BUTTONS FOR SELECT BOXES BASED ON AVAILABE SOURCE
-    Object.keys(keys).forEach(key =>{
-        const varName = keys[key].name;
+        selectVarBoxes.forEach((box, index) => {
+            Object.keys(keys).forEach(key =>{
+                const varName = keys[key].name;
+                const checkVar = index === 0 ? "firstVar" : "secondVar"; 
 
-        const htmlMarkdown = `
-            <button class="selectVarBox__button button button--square">${varName}</button>
-        `;
-        selectVarBoxes.forEach(box => {
-            box.insertAdjacentHTML("beforeend", htmlMarkdown)
+                const htmlMarkdown = `
+                <button class="selectVarBox__button selectVarBox__button--${checkVar} button button--square" id="${key}">${varName}</button>
+                `;
+                box.insertAdjacentHTML("beforeend", htmlMarkdown)
+            })
         });
-    })
+
 }
 
 export const varBoxes__showHide = () =>{
     
-    const selectVarBoxes = Array.from(htmlElements.selectVarBoxes.boxes);
+    // console.log(Array.from(htmlElements.selectVarBoxes.firstVarBox.classList));
+    // console.log(Array.from(htmlElements.selectVarBoxes.firstVarBox.classList).includes('selectVarBox--show'));
+    // console.log(Array.from(htmlElements.shadow.classList).includes('shadow--hide'));
+    
+    // htmlElements.shadow.classList.toggle('shadow--hide');
+
+    if(event.target.id === "headingTitleButton--left"){
+        htmlElements.selectVarBoxes.firstVarBox.classList.toggle('selectVarBox--hide')
+        htmlElements.selectVarBoxes.firstVarBox.classList.toggle('selectVarBox--show')
+    }
+    if(event.target.id === "headingTitleButton--right"){
+        htmlElements.selectVarBoxes.secondVarBox.classList.toggle('selectVarBox--hide')
+        htmlElements.selectVarBoxes.secondVarBox.classList.toggle('selectVarBox--show')
+    }
 
 }
 

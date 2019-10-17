@@ -1,5 +1,7 @@
-import { population } from '../data/population';
-import { area } from '../data/area';
+import { population } from '../data/population'; //test
+import { area } from '../data/area'; //test
+import { cars } from '../data/cars'; //test
+import { highways } from '../data/highways'; //test
 import collection from 'lodash'
 
 
@@ -49,11 +51,13 @@ export default class GusApi{
             cars: {
                 name: "Samochody osobowe",
                 shortName: "Samochody",
+                rawData: cars.results,
                 apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/32561?format=json&unit-level=2&page-size=100'
             },
             highways: {
                 name: 'Drogi ekspresowe i autostrady',
                 shortName: 'Autostrady itp.',
+                rawData: highways.results,
                 apiURL: 'https://bdl.stat.gov.pl/api/v1/data/by-variable/453823?format=json&unit-level=2&page-size=100'
                 //P1722
             }
@@ -75,6 +79,7 @@ export default class GusApi{
 
         this.gusVar[numVar] = this.dataSource[cat];
         this.gusVar[numVar].rawData = data.results; //save data from API to state
+        this.gusVar[numVar].id = cat;
 
         const min =  parseInt(this.gusVar[numVar].rawData[0].values[0].year); //find higher year
         const max =  parseInt(this.gusVar[numVar].rawData[0].values[this.gusVar[numVar].rawData[0].values.length - 1].year); //find lower year
@@ -95,6 +100,7 @@ export default class GusApi{
 
         this.gusVarTEST[numVar] = this.dataSource[cat];
         this.gusVarTEST[numVar].rawData = data.results; //save data from API to state
+        this.gusVar[numVar].id = cat;
 
         const min =  parseInt(this.gusVarTEST[numVar].rawData[0].values[0].year); //find higher year
         const max =  parseInt(this.gusVarTEST[numVar].rawData[0].values[this.gusVarTEST[numVar].rawData[0].values.length - 1].year); //find lower year
@@ -117,6 +123,7 @@ export default class GusApi{
 
         this.gusVar[numVar] = this.dataSource[cat];
         this.gusVar[numVar].rawData = data.results; //save data from API to state
+        this.gusVar[numVar].id = cat;
 
         const min =  parseInt(this.gusVar[numVar].rawData[0].values[0].year); //find higher year
         const max =  parseInt(this.gusVar[numVar].rawData[0].values[this.gusVar[numVar].rawData[0].values.length - 1].year); //find lower year
@@ -137,6 +144,8 @@ export default class GusApi{
         // this[numVar].yearRange = {min, max}
 
         this.gusVar[numVar] = this.dataSource[cat];
+        this.gusVar[numVar].id = cat;
+
         const min =  parseInt(this.gusVar[numVar].rawData[0].values[0].year); //find higher year
         const max =  parseInt(this.gusVar[numVar].rawData[0].values[this.gusVar[numVar].rawData[0].values.length - 1].year); //find lower year
         this.gusVar[numVar].yearRange = {min, max};

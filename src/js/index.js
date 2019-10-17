@@ -9,7 +9,7 @@ const state = {};
 
 
 //POPULATION CONTROLLER---------------------------------------------------------------------------------------------------------------
-const versusBarChart__controller = async () =>{
+const versusBarChart__controller = async (firstVar="population", secondVar="area") =>{
 
     //UI loader start - barChart
     UIRender.barChart__loaders();
@@ -17,7 +17,7 @@ const versusBarChart__controller = async () =>{
     //1.get data
     state.gusApi = new GusApi; // create new class
 
-    //API FROM BROWSER FOR TESTING
+    //API FROM BROWSER FOR TESTING NEW VARS
     // await state.gusApi.getAPIDataTEST('cars', 'secondVar');
 
     // API FROM BROWSER
@@ -25,8 +25,8 @@ const versusBarChart__controller = async () =>{
     // await state.gusApi.getAPIData('cars', 'secondVar');
 
     // APIFROM FILE 
-    state.gusApi.getRawData('population', 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
-    state.gusApi.getRawData('area', 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+    state.gusApi.getRawData(firstVar, 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+    state.gusApi.getRawData(secondVar, 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
 
     //1. API FROM NODE
     // await state.gusApi.getAPIDataNode('population', 'firstVar');
@@ -90,11 +90,43 @@ const versusBarChart__controller = async () =>{
     console.log(state.gusApi);
 };
 
-
 //LAUNCH CONTROLLER
 versusBarChart__controller();
 
 
+//*******************************************************************************************************
+//CHANGE GUS VAR
+const changeGusVar = (event) => {
+
+    // console.log(Array.from(event.target.classList));        
+    const classList = Array.from(event.target.classList);
+    // const firstVar = "";
+
+    if(classList.includes("selectVarBox__button")){
+
+        // console.log(event.target.id);
+        // console.log(classList[1].replace("selectVarBox__button--",""));
+        const classes = classList[1].replace("selectVarBox__button--","");
+        let firstVar;
+        let secondVar;
+
+        if(classes === "firstVar"){
+            firstVar = event.target.id;
+            secondVar = state.gusApi.gusVar.secondVar.id
+        }
+        if(classes === "secondVar"){
+            secondVar = event.target.id;
+            firstVar = state.gusApi.gusVar.firstVar.id
+        }
+        
+        versusBarChart__controller(firstVar, secondVar);
+    };
+};
+//*******************************************************************************************************
+
+
+//*******************************************************************************************************
+//VERSUR BAR CHART
 //SHOW HIDE VARS
 const versusBarChart__showHide = (event) =>{
 
@@ -235,7 +267,6 @@ const versusBarChart__showCombinedData = (event) =>{
     }
 };
 
-
 //CHANGE LABELS ON SMALL SCREEN
 const versusBarChart__changeLabels = () =>{
 
@@ -256,14 +287,8 @@ const versusBarChart__changeLabels = () =>{
         chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow); //render cahrt
     };
 };
+//*******************************************************************************************************
 
-// VAR BOXES
-const varBoxes__showHide = (event) =>{
-
-    htmlElements.shadow.classList.toggle('shadow--hide');
-    console.log(event.target.parentNode)
-
-};
 
 
 //NOT IN USE 
@@ -307,14 +332,14 @@ const versusBarChart__changeYear = (event) => {
 
 
 //EVENT LISTENERS-----------------------------------------------------------------------------------------------------------------------
+//*******************************************************************************************************
 //VERSUR BAR CHART
-
-//SHOW HIDE VATS
+//SHOW HIDE VARS
 htmlElements.versusBarChart.buttonsShowHide.forEach(el => {
     el.addEventListener('click', versusBarChart__showHide);
 });
 
-//CHANGE BEETWEN FIRST ANS SECOND GUSVAR
+//CHANGE SORT BEETWEN FIRST ANS SECOND GUSVAR
 htmlElements.versusBarChart.buttonsSort.forEach(el =>{
     el.addEventListener('click', versusBarChart__sort)
 });
@@ -322,19 +347,26 @@ htmlElements.versusBarChart.buttonsSort.forEach(el =>{
 //SHOW COMBINED DATA
 htmlElements.versusBarChart.buttonAddCrossedVars.parentNode.querySelector('.checkboxBox__input').addEventListener('change', versusBarChart__showCombinedData);
 
-// WINDOW RESIZE
+// WINDOW RESIZE - CHANGE LABELS
 window.addEventListener('resize', versusBarChart__changeLabels);
+//*******************************************************************************************************
 
+
+//*******************************************************************************************************
+//UI
 //INFOBOX
 htmlElements.infoBox.infoBoxTurnOnButton.addEventListener('click', UIRender.showHideInfoBox);
 htmlElements.infoBox.infoBoxTurnOffButton.addEventListener('click', UIRender.showHideInfoBox);
 
-
-//VAR BOXES - show hide
+//VAR BOXES - SHOW HIDE/CHANGE GUS VAR
 htmlElements.selectVarBoxes.buttons.forEach(el => {
-    el.addEventListener('click', varBoxes__showHide)
-
+    el.addEventListener('click', UIRender.varBoxes__showHide) //showHide
 });
+htmlElements.selectVarBoxes.boxes.forEach(el => {
+    el.addEventListener('click', changeGusVar) //change GUS VAR
+});
+//*******************************************************************************************************
+
 
 
 //NOT IN USE
