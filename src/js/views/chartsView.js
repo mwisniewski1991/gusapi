@@ -8,9 +8,8 @@ import {  colors, optionsVersusBarChart, optionsCombined, createOptionsVersusBar
 
 //RENDER CHART WITH TWO GUSVARS
 export const versusBarChartRender = ( { labels, valuesOne, valuesTwo }, state, {firstVarHidden, secondVarHidden} ) => {
-//render chart for population basic 
 
-
+  //render chart for population basic 
   if(state.gusApi.barChart.chart == undefined){
     //if chart not exist create
 
@@ -76,7 +75,7 @@ export const versusBarChartRender = ( { labels, valuesOne, valuesTwo }, state, {
 
     // 4. UPDATE DATA
     state.gusApi.barChart.chart.update();
-  } 
+  };
 
 };
 

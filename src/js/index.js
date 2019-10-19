@@ -15,7 +15,9 @@ const versusBarChart__controller = async (firstVar="population", secondVar="area
     UIRender.barChart__loaders();
 
     //1.get data
-    state.gusApi = new GusApi; // create new class
+    if(state.gusApi === undefined){
+        state.gusApi = new GusApi; // create new class
+    }
 
     //API FROM BROWSER FOR TESTING NEW VARS
     // await state.gusApi.getAPIDataTEST('cars', 'secondVar');
@@ -62,6 +64,9 @@ const versusBarChart__controller = async (firstVar="population", secondVar="area
     //UI loader end - barChart
     UIRender.barChart__loaders();
 
+    //-------------------------------------------------------------------------------------------------
+    //BAR CHART -----------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------
     //9. render bar chart
     chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow);
 
@@ -84,8 +89,9 @@ const versusBarChart__controller = async (firstVar="population", secondVar="area
     );
     
     //SELECT VAR BOX - RENDER BUTTONS
-    UIRender.varBoxes__buttonsRender(state.gusApi.dataSource) 
-
+    if(document.querySelectorAll('.selectVarBox__button').length === 0){ //chech if buttons is already rendered
+        UIRender.varBoxes__buttonsRender(state.gusApi.dataSource) 
+    }
 
     console.log(state.gusApi);
 };
