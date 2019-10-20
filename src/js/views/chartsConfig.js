@@ -11,7 +11,7 @@ export const colors = {
 };
 
 //CREATE OPTIONS BASE ON CURRENT CHART CONFIGURATION 
-export const createOptionsVersusBarChart = ( {firstVarHidden , secondVarHidden} ) => {
+export const createOptionsVersusBarChart = ( {firstVarHidden , secondVarHidden}, {firstVarName, secondVarName} ) => {
 
   const options = {
     maintainAspectRatio: false,
@@ -29,10 +29,17 @@ export const createOptionsVersusBarChart = ( {firstVarHidden , secondVarHidden} 
         }
       }
     ],
-      xAxes:[{
+      xAxes:[
+        {
         display: !firstVarHidden,
         id:"valuesOne",
         position: 'bottom',
+        scaleLabel: {
+          display: true,
+          labelString: firstVarName,
+          fontFamily: 'Alegreya Sans SC',
+          fontColor: colors.colorTwo
+        },  
         ticks: {
           fontFamily: 'Alegreya Sans SC',
           fontColor: colors.colorTwo
@@ -41,12 +48,17 @@ export const createOptionsVersusBarChart = ( {firstVarHidden , secondVarHidden} 
           color: colors.colorFour,
           borderDash: [3,3]
         }
-      }
-      ,
+      },
       {
         display: !secondVarHidden,
         id:"valuesTwo",
         position: 'top',
+        scaleLabel: {
+          display: true,
+          labelString: secondVarName,
+          fontFamily: 'Alegreya Sans SC',
+          fontColor: colors.colorTwo
+        },  
         type: 'linear', //necessery for second XAXIS for horizontal bar
         ticks: {
           fontFamily: 'Alegreya Sans SC',
@@ -152,7 +164,7 @@ export const createOptionScatterChart = ({firstVarName, secondVarName}) => {
         callbacks: {
           label: function(t, data){
             // return `${data.labels[t.index]} Ludnośc: ${t.xLabel}, Pow km2: ${t.yLabel}) `
-            return `${data.labels[t.index]} Ludnośc: ${data.datasets[0].data[t.index].x} Pow km2: ${data.datasets[0].data[t.index].y}`
+            return `${data.labels[t.index]} ${firstVarName}: ${data.datasets[0].data[t.index].x} ${secondVarName}: ${data.datasets[0].data[t.index].y}`
           }
         }
       }

@@ -29,7 +29,7 @@ export default class GusApi{
         }
 
         this.scatterChart = {
-            chart: '',
+            chart: undefined,
             data: '',
             chartConfig: {}
         };

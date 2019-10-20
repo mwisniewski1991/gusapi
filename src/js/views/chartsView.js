@@ -7,14 +7,14 @@ import {  colors, optionsVersusBarChart, optionsCombined, createOptionsVersusBar
 
 
 //RENDER CHART WITH TWO GUSVARS
-export const versusBarChartRender = ( { labels, valuesOne, valuesTwo }, state, {firstVarHidden, secondVarHidden} ) => {
+export const versusBarChartRender = ( { labels, valuesOne, valuesTwo }, state, {firstVarHidden, secondVarHidden}, currentVarNames) => {
 
   //render chart for population basic 
   if(state.gusApi.barChart.chart == undefined){
     //if chart not exist create
 
     //1. CREATE OPTIONS PASS INFO IF VARS SHOULD BE HIDDEN OR NOT - BELOW FUNCTION HIDE AXIS 
-    const options = createOptionsVersusBarChart({firstVarHidden, secondVarHidden});
+    const options = createOptionsVersusBarChart({firstVarHidden, secondVarHidden}, currentVarNames);
   
     //2. CREATE DATA
     const data = {
@@ -45,6 +45,7 @@ export const versusBarChartRender = ( { labels, valuesOne, valuesTwo }, state, {
           data: data,
           options: options
         });
+        
   }else{
 
     //1. CREATE NEW DATA OBJ FOR VERSUS DATA
@@ -71,7 +72,7 @@ export const versusBarChartRender = ( { labels, valuesOne, valuesTwo }, state, {
     state.gusApi.barChart.chart.data = data
 
     //3. GET OPTIONS FOR THIS CHART
-    state.gusApi.barChart.chart.options = createOptionsVersusBarChart({firstVarHidden, secondVarHidden});
+    state.gusApi.barChart.chart.options = createOptionsVersusBarChart({firstVarHidden, secondVarHidden}, currentVarNames);
 
     // 4. UPDATE DATA
     state.gusApi.barChart.chart.update();
@@ -133,31 +134,53 @@ export const versusBarChartShowHide = ({ labels, valuesOne, valuesTwo }, state) 
 
 
 //RENDER SCATTER SCHART
-export const scatterChartRender = ( {dataLabels , dataValues}, currentVarNames) =>{
+export const scatterChartRender = ( {dataLabels , dataValues}, currentVarNames, scatterChart ) =>{
 
+  if(scatterChart === undefined){
+    const options = createOptionScatterChart(currentVarNames);
+    
+    const data = {
+        labels: dataLabels,
+        datasets: [{
+          label: 'Scatter Dataset',
+          data: dataValues,
+          backgroundColor: colors.colorMixTwoThree,
+          hoverRadius: 0
+      }],
+    };
 
-  const options = createOptionScatterChart(currentVarNames);
-  
-  const data = {
-      labels: dataLabels,
-      datasets: [{
-        label: 'Scatter Dataset',
-        data: dataValues,
-        backgroundColor: colors.colorMixTwoThree,
-        hoverRadius: 0
-    }],
-  };
+    //2. GET HTML OBJECT TO PUT CHART
+    const ctx = htmlElements.charts.scatterChart; 
+    
+    //3. CREATE CHART
+      return new Chart(ctx, {
+        // plugins: [ChartDataLabels],
+        type: 'bubble',
+        data: data,
+        options: options
+      });
+  }else{
 
+      //1. CREATE DATA
+      const data = {
+        labels: dataLabels,
+        datasets: [{
+          label: 'Scatter Dataset',
+          data: dataValues,
+          backgroundColor: colors.colorMixTwoThree,
+          hoverRadius: 0
+        }],
+      };
 
+       //2. ADD NEW DATA TO CHART
+      scatterChart.data = data;
 
-  //2. GET HTML OBJECT TO PUT CHART
-  const ctx = htmlElements.charts.scatterChart; 
-  
-  //3. CREATE CHART
-    return new Chart(ctx, {
-      // plugins: [ChartDataLabels],
-      type: 'bubble',
-      data: data,
-      options: options
-    });
+      //3. GET OPTIONS FOR THIS CHART
+      scatterChart.options = createOptionScatterChart(currentVarNames);
+
+      //4. UPDATE DATA
+      scatterChart.update();
+
+      return scatterChart;
+  }
 }

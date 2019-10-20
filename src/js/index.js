@@ -64,28 +64,28 @@ const versusBarChart__controller = async (firstVar="population", secondVar="area
     //UI loader end - barChart
     UIRender.barChart__loaders();
 
-    //-------------------------------------------------------------------------------------------------
-    //BAR CHART -----------------------------------------------------------------------------------
-    //-------------------------------------------------------------------------------------------------
-    //9. render bar chart
-    chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow);
-
-    //-------------------------------------------------------------------------------------------------
-    //SCATTER CHART -----------------------------------------------------------------------------------
-    //-------------------------------------------------------------------------------------------------
-    //get data
-    state.gusApi.scatterChart.data = state.gusApi.scatterChart__createData(); //get data
-    
-     //get gusvar names
+    //get gusvar names
     const currentVarNames = {
         firstVarName: state.gusApi.gusVar.firstVar.name,
         secondVarName: state.gusApi.gusVar.secondVar.name
     };
     
+    //-------------------------------------------------------------------------------------------------
+    //BAR CHART ---------------------------------------------------------------------------------------
+    //9. render bar chart
+    chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow, currentVarNames);
+
+    //-------------------------------------------------------------------------------------------------
+    //SCATTER CHART -----------------------------------------------------------------------------------
+    //get data
+    state.gusApi.scatterChart.data = state.gusApi.scatterChart__createData(); //get data
+    
+    
     //render scatter chart
     state.gusApi.scatterChart.chart = chartsView.scatterChartRender(
         state.gusApi.scatterChart.data, //pass data for chart
-        currentVarNames //pass var names for axis names
+        currentVarNames, //pass var names for axis names
+        state.gusApi.scatterChart.chart //pass if create new or update exist chart
     );
     
     //SELECT VAR BOX - RENDER BUTTONS
@@ -163,7 +163,12 @@ const versusBarChart__showHide = (event) =>{
     }
 
     //4. RENDER CHART
-    chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow);
+    const currentVarNames = {
+        firstVarName: state.gusApi.gusVar.firstVar.name,
+        secondVarName: state.gusApi.gusVar.secondVar.name
+    };
+    
+    chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow, currentVarNames);
 }
 
 //CHANGE SORT BEETWEN FIRST ANS SECOND GUSVAR
@@ -189,7 +194,12 @@ const versusBarChart__sort = (event) => {
         }
 
         //4. RENDER CHART
-        chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow);
+        const currentVarNames = {
+            firstVarName: state.gusApi.gusVar.firstVar.name,
+            secondVarName: state.gusApi.gusVar.secondVar.name
+        };
+        
+        chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow, currentVarNames);
     }
 };
 
@@ -269,7 +279,12 @@ const versusBarChart__showCombinedData = (event) =>{
         }
 
         //6. SHOW VERSUS DATA
-        chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow);
+        const currentVarNames = {
+            firstVarName: state.gusApi.gusVar.firstVar.name,
+            secondVarName: state.gusApi.gusVar.secondVar.name
+        };
+
+        chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow, currentVarNames);
     }
 };
 
@@ -290,7 +305,11 @@ const versusBarChart__changeLabels = () =>{
     //3. CHECK IF THERE IS ANY CHANGES IF YES CHANGE LABELS AND RENDER CHART AGAIN.
     if(currentScreenState !== state.gusApi.screenSize){
         state.gusApi.versusBarChartChangeLabels(state.gusApi.screenSize); //change labels
-        chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow); //render cahrt
+        const currentVarNames = {
+            firstVarName: state.gusApi.gusVar.firstVar.name,
+            secondVarName: state.gusApi.gusVar.secondVar.name
+        };
+        chartsView.versusBarChartRender(state.gusApi.barChart.data, state, state.gusApi.barChart.chartConfig.hideShow, currentVarNames); //render cahrt
     };
 };
 //*******************************************************************************************************
