@@ -46,16 +46,26 @@
         font-size: 3rem;
         text-shadow: 2px 2px 3px $colorThree;
         margin-bottom: 2rem;   
-        
+    
         display: flex;
         justify-content: center;
     }
 
     &__headingTitle{
         position: relative;
+        width: 100%;
 
         display: flex;
         align-items: center;
+        justify-content: center;
+    }
+
+    &__titleLeft{
+        margin-left: auto;
+    }
+
+    &__titleRight{
+        margin-right: auto;
     }
 
     &__headingTitleButton{
