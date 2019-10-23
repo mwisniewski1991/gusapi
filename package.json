@@ -1,8 +1,8 @@
 {
-  "name": "shopping-list",
+  "name": "public_nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "parcel src/index.html",
     "prod": "parcel build src/index.html --public-url ./"
