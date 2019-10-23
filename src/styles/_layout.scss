@@ -58,6 +58,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
+        @media screen and (max-width: $break-small){
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        & .section__headingTitleButton{
+            @media screen and (max-width: $break-small){
+                margin-top: 2rem;
+                order: 2;
+            }
+        }
     }
 
     &__titleLeft{
@@ -241,16 +253,12 @@
     }
 
     &__paragraph{
-        font-size: 3rem;
+        font-size: 2rem;
         text-align: justify;
         margin-bottom: 2rem;
 
-        @media screen and (max-width: $break-medium){
-            // font-size: 2rem;
-        }
-
         @media screen and (max-width: $break-small){
-            // font-size: 1rem;
+            font-size: 2rem;
         }
     }
 

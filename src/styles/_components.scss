@@ -216,6 +216,11 @@
     position: absolute;
     z-index: 3;
     top: 100%;
+    margin-top: 2rem;
+
+    @media screen and (max-width: $break-small){
+        margin-top: 2rem;
+    }
 
     &--show{
         display: flex;
@@ -227,13 +232,20 @@
     }
 
     
-
     &--left{
         left: 50%;
+
+        @media screen and (max-width: $break-small){
+            left: 20%;
+        }
     }
 
     &--right{
         right: 50%;
+
+        @media screen and (max-width: $break-small){
+            right: 20%;
+        }
     }
 
     &__button{
