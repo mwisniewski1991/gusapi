@@ -115,7 +115,8 @@
         left: 0;
 
         &--hidden{
-            visibility: hidden;
+            // visibility: hidden;
+            display: none;
         }
     }
 

@@ -107,7 +107,7 @@ export const varBoxes__buttonsRender = (keys) =>{
 
 }
 
-export const varBoxes__showHide = () =>{
+export const varBoxes__showHide = (event) =>{
     
     // console.log(Array.from(htmlElements.selectVarBoxes.firstVarBox.classList));
     // console.log(Array.from(htmlElements.selectVarBoxes.firstVarBox.classList).includes('selectVarBox--show'));
@@ -123,6 +123,17 @@ export const varBoxes__showHide = () =>{
         htmlElements.selectVarBoxes.secondVarBox.classList.toggle('selectVarBox--hide')
         htmlElements.selectVarBoxes.secondVarBox.classList.toggle('selectVarBox--show')
     }
-
 }
 
+export const varBoxes__showHideSecond = (whichVar) =>{
+
+    if(whichVar === "firstVar"){
+        htmlElements.selectVarBoxes.firstVarBox.classList.toggle('selectVarBox--hide')
+        htmlElements.selectVarBoxes.firstVarBox.classList.toggle('selectVarBox--show')
+    }
+    if(whichVar === "secondVar"){
+        htmlElements.selectVarBoxes.secondVarBox.classList.toggle('selectVarBox--hide')
+        htmlElements.selectVarBoxes.secondVarBox.classList.toggle('selectVarBox--show')
+    }
+
+};

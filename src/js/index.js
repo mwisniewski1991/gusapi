@@ -20,19 +20,19 @@ const versusBarChart__controller = async (firstVar="population", secondVar="area
     }
 
     //API FROM BROWSER FOR TESTING NEW VARS
-    // await state.gusApi.getAPIDataTEST('cars', 'secondVar');
+    // await state.gusApi.getAPIDataTEST(firstVar, 'secondVar');
 
     // API FROM BROWSER
-    // await state.gusApi.getAPIData('population', 'firstVar');
-    // await state.gusApi.getAPIData('cars', 'secondVar');
+    // await state.gusApi.getAPIData(firstVar, 'firstVar');
+    // await state.gusApi.getAPIData(secondVar, 'secondVar');
 
     // APIFROM FILE 
     state.gusApi.getRawData(firstVar, 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
     state.gusApi.getRawData(secondVar, 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
 
     //1. API FROM NODE
-    // await state.gusApi.getAPIDataNode('population', 'firstVar');
-    // await state.gusApi.getAPIDataNode('highways', 'secondVar');
+    // await state.gusApi.getAPIDataNode(firstVar, 'firstVar');
+    // await state.gusApi.getAPIDataNode(secondVar, 'secondVar');
     
 
     //2. Render DOM elements titles for VAR
@@ -119,10 +119,12 @@ const changeGusVar = (event) => {
         if(classes === "firstVar"){
             firstVar = event.target.id;
             secondVar = state.gusApi.gusVar.secondVar.id
+            UIRender.varBoxes__showHideSecond("firstVar");
         }
         if(classes === "secondVar"){
             secondVar = event.target.id;
             firstVar = state.gusApi.gusVar.firstVar.id
+            UIRender.varBoxes__showHideSecond("secondVar");
         }
         
         versusBarChart__controller(firstVar, secondVar);
