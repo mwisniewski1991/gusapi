@@ -64,7 +64,20 @@ export const versusBarChart__enableButtons = ( {firstVarHidden , secondVarHidden
     //3. CHECKED BUTTONS FOR SORTING ACORDING TO CURRENT STATE
     htmlElements.versusBarChart.buttonsShowHide[0].parentNode.parentNode.querySelector('#showHideVar1').checked = !firstVarHidden;
     htmlElements.versusBarChart.buttonsShowHide[0].parentNode.parentNode.querySelector('#showHideVar2').checked = !secondVarHidden;
-    
+};
+
+export const versusBarChart__deafultButtons = () => {
+    htmlElements.versusBarChart.buttonsSort.forEach( el => {
+        el.parentNode.querySelector('.radioBox__input').disabled = false;
+    });
+
+    //2. ENABLE BUTTONS FOR SORTING
+    htmlElements.versusBarChart.buttonsShowHide.forEach( el => {
+        el.parentNode.querySelector('.checkboxBox__input').disabled = false;
+    })
+
+    htmlElements.versusBarChart.buttonsShowHide[0].parentNode.parentNode.querySelector('#showHideVar1').checked = true;
+    htmlElements.versusBarChart.buttonsShowHide[0].parentNode.parentNode.querySelector('#showHideVar2').checked = false;
 };
 
 

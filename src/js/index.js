@@ -19,6 +19,9 @@ const versusBarChart__controller = async (firstVar="population", secondVar="area
         state.gusApi = new GusApi; // create new class
     }
 
+    //-------------------------------------------------------------------------------------------------
+    //DATA --------------------------------------------------------------------------------------------
+
     //API FROM BROWSER FOR TESTING NEW VARS
     // await state.gusApi.getAPIDataTEST(firstVar, 'secondVar');
 
@@ -33,7 +36,6 @@ const versusBarChart__controller = async (firstVar="population", secondVar="area
     //1. API FROM NODE
     // await state.gusApi.getAPIDataNode(firstVar, 'firstVar');
     // await state.gusApi.getAPIDataNode(secondVar, 'secondVar');
-    
 
     //2. Render DOM elements titles for VAR
     UIRender.renderTitle(state.gusApi.gusVar); //titles
@@ -63,6 +65,7 @@ const versusBarChart__controller = async (firstVar="population", secondVar="area
 
     //UI loader end - barChart
     UIRender.barChart__loaders();
+
 
     //get gusvar names
     const currentVarNames = {
@@ -95,7 +98,6 @@ const versusBarChart__controller = async (firstVar="population", secondVar="area
 
     console.log(state.gusApi);
 };
-
 //LAUNCH CONTROLLER
 versusBarChart__controller();
 
@@ -128,11 +130,33 @@ const changeGusVar = (event) => {
         }
         
         versusBarChart__controller(firstVar, secondVar);
+
+        // DEAFULT STATE FOR CONTROLLER - IT SHOULD BE BETTER
+            //1. ENABLE BUTTONS
+            UIRender.versusBarChart__enableButtons(state.gusApi.barChart.chartConfig.hideShow); //pass argument which buttons need to be checked
+
+            //2. ADD EVENT LISTENNERS
+            htmlElements.versusBarChart.buttonsSort.forEach(el =>{
+                el.addEventListener('click', versusBarChart__sort)
+            });
+
+            htmlElements.versusBarChart.buttonsShowHide.forEach( el => {
+                el.addEventListener('click', versusBarChart__showHide);
+            })
+
+            htmlElements.versusBarChart.buttonsSort[0].parentNode.querySelector('.radioBox__input').checked = true;
+            htmlElements.versusBarChart.buttonsSort[1].parentNode.querySelector('.radioBox__input').checked = false;
+
+            //5. CHANGE LABELS FOR SMALL SCREEEN
+            if(state.gusApi.screenSize === "small"){
+                state.gusApi.versusBarChartChangeLabels(state.gusApi.screenSize); //change labels
+            }
+
+            //6. UNCHECKED COMBINED BUTTON
+            htmlElements.versusBarChart.buttonAddCrossedVars.parentNode.querySelector('.checkboxBox__input').checked = false;
     };
 };
 //*******************************************************************************************************
-
-
 //*******************************************************************************************************
 //VERSUR BAR CHART
 //SHOW HIDE VARS
@@ -316,48 +340,6 @@ const versusBarChart__changeLabels = () =>{
 };
 //*******************************************************************************************************
 
-
-
-//NOT IN USE 
-const versusBarChart__changeYear = (event) => {
-    //change year for basic chart
-    
-    let changeMade = false; //variable to check if current year has changes
-    const spanHtml = htmlElements.populationVsArea.spanCurrentYear; //span from html markdown 
-    
-    // 1. check which button is clicked and control to be between year range
-        if(event.target.id === "previous"){ //check button 
-            if(state.gusApi.populationVsArea.currentYear - 1 >= state.gusApi.populationVsArea.population.yearRange.min){ //check year range
-                state.gusApi.populationVsArea.currentYear -= 1; //minus one year
-                changeMade = true; //check fla
-            }
-        }
-    
-        if(event.target.id === "next"){ //check button
-            if(state.gusApi.populationVsArea.currentYear + 1 <= state.gusApi.populationVsArea.population.yearRange.max){ //check year range
-                state.gusApi.populationVsArea.currentYear += 1; //add one year
-                changeMade = true; //check flag
-            }
-        }
-        
-        // 2. check if change has been made
-        if(changeMade){
-            //1. change year in span html
-            spanHtml.innerText = state.gusApi.populationVsArea.currentYear;
-            //2. transform data - input year, by default -> 2018, UI -> input
-            state.gusApi.populationVsArea__getTranformData('population',state.gusApi.populationVsArea.population.rawData, state.gusApi.populationVsArea.currentYear);
-            state.gusApi.populationVsArea__getTranformData('area',state.gusApi.populationVsArea.area.rawData, state.gusApi.populationVsArea.currentYear);
-            //3. render chart
-            chartsView.populationVsArea__renderChart(
-                state.gusApi.populationVsArea.population.transformedData, 
-                state.gusApi.populationVsArea.area.transformedData, 
-                state);
-        }
-    };
-
-
-
-
 //EVENT LISTENERS-----------------------------------------------------------------------------------------------------------------------
 //*******************************************************************************************************
 //VERSUR BAR CHART
@@ -378,7 +360,6 @@ htmlElements.versusBarChart.buttonAddCrossedVars.parentNode.querySelector('.chec
 window.addEventListener('resize', versusBarChart__changeLabels);
 //*******************************************************************************************************
 
-
 //*******************************************************************************************************
 //UI
 //INFOBOX
@@ -393,10 +374,3 @@ htmlElements.selectVarBoxes.boxes.forEach(el => {
     el.addEventListener('click', changeGusVar) //change GUS VAR
 });
 //*******************************************************************************************************
-
-
-
-//NOT IN USE
-htmlElements.versusBarChart.buttonsChangeYear.forEach(el => {
-    el.addEventListener('click', versusBarChart__changeYear) //!! UPDATE !!
-});
