@@ -126,9 +126,6 @@
         transition: all .2s;
     }
 
-    &__label{
-    }
-
     &__label &__input:checked ~ &__indicator{
         color: $colorTwo;
     }
