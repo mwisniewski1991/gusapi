@@ -143,8 +143,13 @@ const changeGusVar = (event) => {
                 el.addEventListener('click', versusBarChart__showHide);
             })
 
+            //3. SORT BUTTONS DEFAULT STATE
             htmlElements.versusBarChart.buttonsSort[0].parentNode.querySelector('.radioBox__input').checked = true;
             htmlElements.versusBarChart.buttonsSort[1].parentNode.querySelector('.radioBox__input').checked = false;
+
+            //4. HIDE/SHOW BUTTONS DEFAULT STATE
+            htmlElements.versusBarChart.buttonsShowHide[0].parentNode.querySelector('.checkboxBox__input').checked = true;
+            htmlElements.versusBarChart.buttonsShowHide[1].parentNode.querySelector('.checkboxBox__input').checked = true;
 
             //5. CHANGE LABELS FOR SMALL SCREEEN
             if(state.gusApi.screenSize === "small"){
