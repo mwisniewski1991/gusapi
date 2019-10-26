@@ -30,12 +30,12 @@ const versusBarChart__controller = async (firstVar="population", secondVar="area
     // await state.gusApi.getAPIData(secondVar, 'secondVar');
 
     // APIFROM FILE 
-    state.gusApi.getRawData(firstVar, 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
-    state.gusApi.getRawData(secondVar, 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+    // state.gusApi.getRawData(firstVar, 'firstVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
+    // state.gusApi.getRawData(secondVar, 'secondVar'); //load data from api TESTING VERSION FROM JS !!!!!!!!!!!!!!!!!!!!
 
-    //1. API FROM NODE
-    // await state.gusApi.getAPIDataNode(firstVar, 'firstVar');
-    // await state.gusApi.getAPIDataNode(secondVar, 'secondVar');
+    // 1. API FROM NODE
+    await state.gusApi.getAPIDataNode(firstVar, 'firstVar');
+    await state.gusApi.getAPIDataNode(secondVar, 'secondVar');
 
     //2. Render DOM elements titles for VAR
     UIRender.renderTitle(state.gusApi.gusVar); //titles
@@ -96,11 +96,10 @@ const versusBarChart__controller = async (firstVar="population", secondVar="area
         UIRender.varBoxes__buttonsRender(state.gusApi.dataSource) 
     }
 
-    console.log(state.gusApi);
+    // console.log(state.gusApi);
 };
 //LAUNCH CONTROLLER
 versusBarChart__controller();
-
 
 //*******************************************************************************************************
 //CHANGE GUS VAR

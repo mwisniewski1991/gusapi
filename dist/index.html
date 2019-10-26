@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="/js.00a46daa.css"></head>
 
 <body>
+    <div class="shadow shadow--hide"></div>
 
     <div class="infoBox infoBox--hide">
         <div class="infoBox__square">
@@ -23,8 +24,14 @@
                 Dane pochodzą z GUS. W chwili obecnej są one zapisane w pliku i z niego pobierane.
             </p>
             <p class="infoBox__paragraph">
-                W przyszłości zostanie dodana możliwość wyboru zmiennej. Użytkownik będzie mógł porównać 
-                wybrane przez siebie dane, które będą pobierane z GUS API.
+                Pierwszy wykres słupkowy poziomy pozwala prześledzić jak w odniesieniu do wybranej zmiennej
+                prezentują się poszczególne województwa. Kontroller z prawej strony pozwala pokazywać i ukrywać
+                na wykresie wybraną zmienną i sortować według uznania. Ostatnia opcja oblicza jak obie zmienne kształtują
+                się wobec siebie.  
+            </p>
+            <p class="infoBox__paragraph">
+                Wykres bąbelkowy pozwala prześledzić gdzie jak województwa prezentują się w odniesienu do obu zmiennych.
+                Wielkość koła oznacza wartość podzielonych przez siebie zmiennych.
             </p>
             <button class="infoBox__close" id="infoBoxTurnOffButton"></button>
         </div>
@@ -41,24 +48,53 @@
         </h2> -->
 
         <div class="header__info">
-            <button class="header__infoButton button" id="infoBoxTurnOnButton">Info</button>
+            <button class="header__infoButton button button--square" id="infoBoxTurnOnButton">Info</button>
         </div>
     </header>
 
     <section class="section">
-        <h3 class="section__heading">
-            <span class="title title--one" id="versusBarChart__firstVarTitle"></span>
+        <div class="section__heading">
+            <div class="section__headingTitle">
+
+                <button class="section__headingTitleButton button button--squareSmall" id="headingTitleButton--left">Zmień</button>
+                <h3 class="section__titleLeft title title--one" id="versusBarChart__firstVarTitle"></h3>
+
+                <div class="selectVarBox selectVarBox--left selectVarBox--hide" id="selectVarBox__firstVar">
+                    <!-- <button class="selectVarBox__button button button--square">Samochody</button> EXAMPLE-->
+                </div>
+            
+            </div>
             <span class="title title--three" id="versusBarChart__varSeparator">vs</span>
-            <span class="title title--two" id="versusBarChart__secondVarTitle"></span>
-        </h3>
+            <div class="section__headingTitle">
+            
+                <h3 class="section__titleRight title title--two" id="versusBarChart__secondVarTitle"></h3>
+                <button class="section__headingTitleButton button button--squareSmall" id="headingTitleButton--right">Zmień</button>
+                
+                <div class="selectVarBox selectVarBox--right selectVarBox--hide" id="selectVarBox__secondVar">
+                    <!-- <button class="selectVarBox__button button button--square">Podatki</button> EXAMPLE-->
+                </div>
+
+            </div>
+        </div>
 
         <div class="section__box">
 
-            <div class="section__chartBox">
+            <div class="section__chartBox section__chartBox--short">
                 <canvas id="versusBarChart__chart" width="400" height="200"></canvas>
+                <div class="section__loaderBox section__loaderBox--hidden">
+                    <div class="circle">
+                        <div class="circle__small">
+                          <div class="circle__small">
+                            <div class="circle__small">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
             </div>
 
             <div class="section__ctrl versusBarChartCtrl">
+
 
                 <!-- <div class="section__module">
                     <div>
@@ -72,8 +108,9 @@
                 </div> -->
 
                 <div class="section__module">
-
+                    
                     <span class="section__text">Pokaż/ukryj</span>
+                    <!-- <button class="button button--circle button--module">I</button> -->
 
                     <div class="versusBarChartCtrl__optionsBox">
                         <div class="checkboxBox">
@@ -112,22 +149,42 @@
                 </div>
 
                 <div class="section__module">
-                    <span class="section__text"> Oblicz wskaźnik </span>
+                        
+                    <span class="section__text">Oblicz wskaźnik</span>
 
-                        <div class="versusBarChartCtrl__optionsBox versusBarChartCtrl__optionsBox--special">
+                    <div class="versusBarChartCtrl__optionsBox versusBarChartCtrl__optionsBox--special">
 
-                            <div class="checkboxBox">
-                                <input class="checkboxBox__input" type="checkbox" id="crossedVars">
-                                <label class="checkboxBox__label section__textSmall" for="crossedVars" id="versusBarChart__crossedVars">Pokaż
-                                </label>
-                            </div>
-
+                        <div class="checkboxBox">
+                            <input class="checkboxBox__input" type="checkbox" id="crossedVars">
+                            <label class="checkboxBox__label section__textSmall" for="crossedVars" id="versusBarChart__crossedVars">Pokaż
+                            </label>
                         </div>
+
+                    </div>
 
                 </div>
 
             </div>
 
+        </div>
+
+    </section>
+
+    <section class="section">
+        <div class="section__box">  
+            <div class="section__chartBox section__chartBox--long">
+                <canvas id="scatterChart__chart" width="400" height="200"></canvas>
+                <div class="section__loaderBox section__loaderBox--hidden">
+                    <div class="circle">
+                        <div class="circle__small">
+                          <div class="circle__small">
+                            <div class="circle__small">
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </section>

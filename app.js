@@ -1,12 +1,10 @@
 const express = require('express');
 const fetch = require('node-fetch');
 
-const app = express();
-
-// app.listen(3000, () => console.log("Listening on PORT 3000"));
-// app.use(express.static('dist'));
-
 //CREATE APP 
+
+const app = express();
+// app.listen(3000, () => console.log("Listening on PORT 3000"));
 app.listen(3000);
 app.use(express.static('dist'));
 // app.use(express.static('public'));
@@ -32,7 +30,6 @@ const dataSource = {
 //REQUEST GET
 app.get('/gusapi/:cat', async (req, res) => {
     try{
-
         //PARAMETER SAY WHICH DATA SHOULD BE DOWNLOAD
         const cat = req.params.cat;
         const url = dataSource[cat].apiURL;
@@ -45,16 +42,13 @@ app.get('/gusapi/:cat', async (req, res) => {
             }})
             const data = await response.json()
             
-            // console.log("SEND DATA")
             //SEND DATA TO FRONT
             res.json(data);
-
     } catch(err){
-        console.log("ERROR ERROR")
-        console.log(err)
+        console.log("ERROR ERROR");
+        console.log(err);
     }
 });
-
 
 //STRUKTURA GUS API
 // K > G > P > variable  
