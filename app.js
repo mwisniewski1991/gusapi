@@ -29,8 +29,6 @@ const dataSource = {
     }
 }
 
-
-
 //REQUEST GET
 app.get('/gusapi/:cat', async (req, res) => {
     try{
@@ -60,16 +58,3 @@ app.get('/gusapi/:cat', async (req, res) => {
 
 //STRUKTURA GUS API
 // K > G > P > variable  
-
-
-// app.get('/test', async (req, res) => {
-
-//     console.log("sending data")
-
-//     const testData = {
-//         test: "working"
-//     }
-    
-//     res.json(testData);
-
-// });
