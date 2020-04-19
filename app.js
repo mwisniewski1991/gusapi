@@ -1,6 +1,6 @@
 const express = require('express');
 const fetch = require('node-fetch');
-
+require('dotenv/config');
 //CREATE APP 
 
 const app = express();
@@ -33,17 +33,19 @@ app.get('/gusapi/:cat', async (req, res) => {
         //PARAMETER SAY WHICH DATA SHOULD BE DOWNLOAD
         const cat = req.params.cat;
         const url = dataSource[cat].apiURL;
+        const clientID = process.env.CLIENT_ID;
         
         const response = await fetch(url, {
             method: "GET",
             mode: 'cors',
             headers: {
-                'X-ClientId': '1a7ec620-12ad-4092-9b61-08d6b5ef3084'
+                'X-ClientId': clientID,
             }})
             const data = await response.json()
             
             //SEND DATA TO FRONT
             res.json(data);
+            
     } catch(err){
         console.log("ERROR ERROR");
         console.log(err);
